@@ -1,0 +1,20 @@
+{
+  "name": "portfolio-sim",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Simran Kumari portfolio: React + TypeScript frontend, Express + TypeScript + MongoDB backend.",
+  "workspaces": [
+    "client",
+    "server"
+  ],
+  "scripts": {
+    "dev": "concurrently -n server,client -c cyan,green \"npm run dev -w server\" \"npm run dev -w client\"",
+    "build": "npm run build -w client && npm run build -w server",
+    "start": "npm run start -w server",
+    "typecheck": "npm run typecheck -w client && npm run typecheck -w server",
+    "test": "npm run test -w client && npm run test -w server"
+  },
+  "devDependencies": {
+    "concurrently": "^9.1.0"
+  }
+}

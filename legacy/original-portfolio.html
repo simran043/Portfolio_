@@ -1,0 +1,1788 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Simran Kumari | Software Engineer & Robotics Innovator</title>
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- Font Awesome Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <!-- Google Fonts: Plus Jakarta Sans & JetBrains Mono -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['"Plus Jakarta Sans"', 'sans-serif'],
+            mono: ['"JetBrains Mono"', 'monospace'],
+          },
+          colors: {
+            surface: {
+              base: '#080c14',
+              card: '#0d1424',
+              elevated: '#131e34',
+              border: 'rgba(255, 255, 255, 0.08)'
+            },
+            brand: {
+              cyan: '#06b6d4',
+              emerald: '#10b981',
+              violet: '#8b5cf6',
+              amber: '#f59e0b',
+              rose: '#f43f5e'
+            }
+          }
+        }
+      }
+    }
+  </script>
+
+  <style>
+    /* Custom Scrollbar */
+    ::-webkit-scrollbar { width: 8px; }
+    ::-webkit-scrollbar-track { background: #080c14; }
+    ::-webkit-scrollbar-thumb { background: #1e293b; border-radius: 4px; }
+    ::-webkit-scrollbar-thumb:hover { background: #06b6d4; }
+
+    /* Glassmorphism styling */
+    .glass-panel {
+      background: rgba(13, 20, 36, 0.72);
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
+      border: 1px solid rgba(255, 255, 255, 0.07);
+    }
+    .glass-panel-elevated {
+      background: rgba(19, 30, 52, 0.85);
+      backdrop-filter: blur(18px);
+      -webkit-backdrop-filter: blur(18px);
+      border: 1px solid rgba(255, 255, 255, 0.12);
+    }
+    .light .glass-panel {
+      background: rgba(255, 255, 255, 0.9);
+      border: 1px solid rgba(0, 0, 0, 0.08);
+    }
+
+    /* Sliders */
+    input[type=range] {
+      accent-color: #06b6d4;
+    }
+
+    /* Radar scan effect */
+    @keyframes radarScan {
+      from { transform: rotate(0deg); }
+      to { transform: rotate(360deg); }
+    }
+    .radar-spin {
+      animation: radarScan 3s linear infinite;
+    }
+
+    /* Ambient pulse */
+    @keyframes pulseGlow {
+      0%, 100% { opacity: 0.3; }
+      50% { opacity: 0.7; }
+    }
+    .glow-animate {
+      animation: pulseGlow 4s ease-in-out infinite;
+    }
+  </style>
+</head>
+<body class="bg-surface-base text-slate-100 transition-colors duration-300 selection:bg-cyan-500 selection:text-white relative overflow-x-hidden">
+
+  <!-- Interactive Subtle Particle Mesh Canvas -->
+  <canvas id="bg-canvas" class="fixed inset-0 pointer-events-none z-0 w-full h-full opacity-40"></canvas>
+
+  <!-- Ambient Light Orbs -->
+  <div class="fixed top-[-10%] left-[-10%] w-[550px] h-[550px] bg-cyan-500/10 rounded-full blur-[140px] pointer-events-none z-0 glow-animate"></div>
+  <div class="fixed top-[40%] right-[-10%] w-[600px] h-[600px] bg-emerald-500/10 rounded-full blur-[160px] pointer-events-none z-0 glow-animate" style="animation-delay: 2s;"></div>
+
+  <!-- Toast Notification System -->
+  <div id="toast-container" class="fixed bottom-6 right-6 z-50 flex flex-col gap-3 pointer-events-none"></div>
+
+  <!-- Main Navigation Bar -->
+  <header class="fixed top-0 left-0 right-0 z-40 px-4 py-3 sm:px-8">
+    <div class="max-w-7xl mx-auto flex items-center justify-between glass-panel rounded-2xl px-5 py-3 shadow-2xl">
+      
+      <!-- Brand Logo / Monogram -->
+      <a href="#hero" class="flex items-center gap-3 group">
+        <div class="w-10 h-10 rounded-xl bg-gradient-to-tr from-cyan-500 via-teal-400 to-emerald-500 flex items-center justify-center text-black font-extrabold text-sm shadow-lg shadow-cyan-500/20 group-hover:scale-105 transition-transform">
+          SK
+        </div>
+        <div>
+          <div class="flex items-center gap-2">
+            <span class="font-extrabold text-sm text-white tracking-wide">Simran Kumari</span>
+            <span class="text-[10px] font-mono px-2 py-0.5 rounded-full bg-emerald-950/80 text-emerald-400 border border-emerald-500/30">Available</span>
+          </div>
+          <span class="text-[11px] text-cyan-400 font-mono">B.Tech Mechanical • BIT Patna</span>
+        </div>
+      </a>
+
+      <!-- Desktop Navigation Links -->
+      <nav class="hidden lg:flex items-center gap-7 text-xs font-semibold uppercase tracking-wider text-slate-300">
+        <a href="#about" class="hover:text-cyan-400 transition-colors">Overview</a>
+        <a href="#experience" class="hover:text-cyan-400 transition-colors">Experience & Edu</a>
+        <a href="#projects" class="hover:text-cyan-400 transition-colors text-cyan-400 flex items-center gap-1.5">
+          <span class="w-2 h-2 rounded-full bg-cyan-400 animate-ping"></span> Live Demos
+        </a>
+        <a href="#skills" class="hover:text-cyan-400 transition-colors">Skills Matrix</a>
+        <a href="#awards" class="hover:text-cyan-400 transition-colors">Honors</a>
+        <a href="#contact" class="hover:text-cyan-400 transition-colors">Contact</a>
+      </nav>
+
+      <!-- Utility Actions -->
+      <div class="flex items-center gap-3">
+        <!-- Sound FX Mute Toggle -->
+        <button id="sound-toggle-btn" onclick="toggleAudioFx()" title="Toggle Interface Audio" class="w-9 h-9 rounded-xl bg-slate-800/80 hover:bg-slate-700 text-slate-300 hover:text-cyan-400 flex items-center justify-center text-xs transition border border-white/5">
+          <i id="sound-icon" class="fas fa-volume-high"></i>
+        </button>
+
+        <!-- Theme Toggle -->
+        <button id="theme-toggle" aria-label="Toggle Theme" class="w-9 h-9 rounded-xl bg-slate-800/80 hover:bg-slate-700 text-slate-300 hover:text-cyan-400 flex items-center justify-center text-xs transition border border-white/5">
+          <i id="theme-icon" class="fas fa-moon"></i>
+        </button>
+
+        <!-- Direct Resume Trigger -->
+        <button onclick="requestResume()" class="hidden sm:inline-flex items-center gap-2 px-3.5 py-2 rounded-xl text-xs font-semibold bg-slate-800/80 hover:bg-slate-700 text-slate-200 border border-white/10 transition">
+          <i class="fas fa-file-arrow-down text-cyan-400"></i>
+          <span>CV</span>
+        </button>
+
+        <!-- Primary CTA -->
+        <a href="#contact" class="inline-flex items-center gap-2 px-4 py-2 rounded-xl text-xs font-bold bg-gradient-to-r from-cyan-500 to-emerald-500 hover:from-cyan-400 hover:to-emerald-400 text-black shadow-md shadow-cyan-500/20 transition-all hover:scale-105 active:scale-95">
+          <span>Hire Simran</span>
+          <i class="fas fa-arrow-right text-[10px]"></i>
+        </a>
+
+        <!-- Mobile Drawer Toggle -->
+        <button id="mobile-menu-btn" class="lg:hidden w-9 h-9 rounded-xl bg-slate-800 flex items-center justify-center text-slate-300">
+          <i class="fas fa-bars"></i>
+        </button>
+      </div>
+    </div>
+
+    <!-- Mobile Drawer Menu -->
+    <div id="mobile-menu" class="hidden lg:hidden mt-2 p-5 glass-panel rounded-2xl shadow-2xl flex flex-col gap-3 text-center text-xs font-semibold uppercase tracking-wider">
+      <a href="#about" class="mobile-nav-link text-slate-200 hover:text-cyan-400 py-1.5">Overview</a>
+      <a href="#experience" class="mobile-nav-link text-slate-200 hover:text-cyan-400 py-1.5">Experience & Edu</a>
+      <a href="#projects" class="mobile-nav-link text-cyan-400 py-1.5">Projects & Live Demos</a>
+      <a href="#skills" class="mobile-nav-link text-slate-200 hover:text-cyan-400 py-1.5">Skills Matrix</a>
+      <a href="#awards" class="mobile-nav-link text-slate-200 hover:text-cyan-400 py-1.5">Honors & Certs</a>
+      <a href="#contact" class="mobile-nav-link text-slate-200 hover:text-cyan-400 py-1.5">Contact</a>
+    </div>
+  </header>
+
+  <!-- ==========================================
+       HERO & EXECUTIVE SUMMARY SECTION
+       ========================================== -->
+  <section id="hero" class="relative z-10 pt-32 pb-16 md:pt-40 md:pb-24 max-w-7xl mx-auto px-6 lg:px-8">
+    <div class="grid grid-cols-1 lg:grid-cols-12 gap-10 items-center">
+      
+      <!-- Left Column: Bio & Badges -->
+      <div class="lg:col-span-7 space-y-5 text-center lg:text-left">
+        
+        <!-- Live Badges Row -->
+        <div class="flex flex-wrap items-center justify-center lg:justify-start gap-2.5">
+          <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-cyan-950/60 border border-cyan-500/30 text-xs font-mono text-cyan-300">
+            <span class="w-2 h-2 rounded-full bg-cyan-400 animate-ping"></span>
+            <span>Portfolio Design Hackathon 2026</span>
+          </div>
+          <div class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-amber-950/60 border border-amber-500/30 text-xs font-mono text-amber-300">
+            <i class="fas fa-trophy text-[11px]"></i>
+            <span>1st Prize • BIT Mesra Colloquium</span>
+          </div>
+          <div class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-purple-950/60 border border-purple-500/30 text-xs font-mono text-purple-300">
+            <i class="fas fa-robot text-[11px]"></i>
+            <span>IIT (BHU) Research Intern</span>
+          </div>
+        </div>
+
+        <h1 class="text-4xl sm:text-5xl lg:text-6xl font-extrabold text-white tracking-tight leading-tight">
+          Hi, I'm <span class="text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 via-teal-300 to-emerald-400">Simran Kumari</span>
+        </h1>
+
+        <!-- Animated Typing Banner -->
+        <div class="text-base sm:text-xl font-medium text-slate-300 flex items-center justify-center lg:justify-start gap-2 h-8">
+          <span class="font-mono text-cyan-400 font-bold">></span>
+          <span id="typing-text" class="text-white font-semibold font-mono border-r-2 border-cyan-400 pr-1"></span>
+        </div>
+
+        <p class="text-sm sm:text-base text-slate-300 max-w-2xl leading-relaxed">
+          Final year B.Tech student in Mechanical Engineering at <strong class="text-white">Birla Institute of Technology, Patna</strong> (CGPA 7.3/10). Blending full-stack architecture (React, Node, Express, MongoDB) with robotic automation and AI hardware integrations. Passionate about algorithms, scalable engineering, and clean interactive human-machine interfaces.
+        </p>
+
+        <!-- High-Impact Live Stats Grid -->
+        <div class="grid grid-cols-2 sm:grid-cols-4 gap-3 max-w-xl mx-auto lg:mx-0 pt-2">
+          <div class="glass-panel p-3.5 rounded-2xl text-center border-t-2 border-t-cyan-500 hover:border-cyan-400 transition">
+            <div class="text-xl sm:text-2xl font-extrabold text-white font-mono">7.3<span class="text-cyan-400 text-sm">/10</span></div>
+            <div class="text-[11px] text-slate-400 font-medium mt-0.5">B.Tech CGPA</div>
+          </div>
+          <div class="glass-panel p-3.5 rounded-2xl text-center border-t-2 border-t-emerald-500 hover:border-emerald-400 transition">
+            <div class="text-xl sm:text-2xl font-extrabold text-emerald-400 font-mono">3+</div>
+            <div class="text-[11px] text-slate-400 font-medium mt-0.5">Playable Demos</div>
+          </div>
+          <div class="glass-panel p-3.5 rounded-2xl text-center border-t-2 border-t-purple-500 hover:border-purple-400 transition">
+            <div class="text-xl sm:text-2xl font-extrabold text-purple-400 font-mono">1st</div>
+            <div class="text-[11px] text-slate-400 font-medium mt-0.5">Research Award</div>
+          </div>
+          <div class="glass-panel p-3.5 rounded-2xl text-center border-t-2 border-t-amber-500 hover:border-amber-400 transition">
+            <div class="text-xl sm:text-2xl font-extrabold text-amber-400 font-mono">3x</div>
+            <div class="text-[11px] text-slate-400 font-medium mt-0.5">Infosys Certified</div>
+          </div>
+        </div>
+
+        <!-- Hero Actions -->
+        <div class="flex flex-wrap items-center justify-center lg:justify-start gap-3.5 pt-3">
+          <a href="#projects" class="px-6 py-3 rounded-xl text-xs sm:text-sm font-bold bg-gradient-to-r from-cyan-500 via-teal-400 to-emerald-500 text-black shadow-lg shadow-cyan-500/25 hover:scale-105 active:scale-95 transition flex items-center gap-2">
+            <i class="fas fa-play-circle text-sm"></i>
+            <span>Explore Interactive Demos</span>
+          </a>
+          <button onclick="requestResume()" class="px-5 py-3 rounded-xl text-xs sm:text-sm font-semibold glass-panel hover:bg-slate-800 text-slate-200 border border-white/10 transition flex items-center gap-2">
+            <i class="fas fa-file-pdf text-rose-400"></i>
+            <span>View Resume</span>
+          </button>
+          <a href="#contact" class="px-5 py-3 rounded-xl text-xs sm:text-sm font-semibold glass-panel hover:bg-cyan-950/40 text-cyan-300 border border-cyan-500/30 transition flex items-center gap-2">
+            <i class="fas fa-paper-plane text-cyan-400"></i>
+            <span>Get in Touch</span>
+          </a>
+        </div>
+
+        <!-- Social Channels & Quick Info -->
+        <div class="flex items-center justify-center lg:justify-start gap-4 pt-2 text-slate-400 text-xs">
+          <span class="font-mono text-slate-500 uppercase tracking-widest text-[11px]">Connect:</span>
+          <a href="mailto:simrankumariltr@gmail.com" class="hover:text-cyan-400 transition flex items-center gap-1.5"><i class="fas fa-envelope"></i> simrankumariltr@gmail.com</a>
+          <span class="text-slate-700">•</span>
+          <a href="tel:+916202028486" class="hover:text-emerald-400 transition flex items-center gap-1.5"><i class="fas fa-phone"></i> +91 6202028486</a>
+        </div>
+      </div>
+
+      <!-- Right Column: Interactive Diagnostic HUD Card -->
+      <div class="lg:col-span-5 flex justify-center">
+        <div class="w-full max-w-md glass-panel-elevated rounded-3xl p-6 border border-white/10 shadow-2xl space-y-4 relative overflow-hidden">
+          
+          <!-- Background Radar Watermark -->
+          <div class="absolute -right-16 -top-16 w-48 h-48 rounded-full border border-cyan-500/10 pointer-events-none flex items-center justify-center">
+            <div class="w-32 h-32 rounded-full border border-cyan-500/15"></div>
+            <div class="absolute w-24 h-0.5 bg-gradient-to-r from-transparent to-cyan-400/40 origin-left radar-spin"></div>
+          </div>
+
+          <!-- Card Header -->
+          <div class="flex items-center justify-between pb-3 border-b border-white/10">
+            <div class="flex items-center gap-2">
+              <span class="w-3 h-3 rounded-full bg-rose-500/80"></span>
+              <span class="w-3 h-3 rounded-full bg-amber-500/80"></span>
+              <span class="w-3 h-3 rounded-full bg-emerald-500/80"></span>
+              <span class="ml-2 text-xs font-mono text-cyan-400 font-semibold">simran_spec.json</span>
+            </div>
+            <span class="text-[10px] font-mono text-emerald-400 bg-emerald-950/70 px-2 py-0.5 rounded border border-emerald-500/30">ONLINE</span>
+          </div>
+
+          <!-- Code Snippet Profile -->
+          <pre class="bg-black/60 rounded-2xl p-4 text-xs font-mono text-slate-300 leading-relaxed overflow-x-auto border border-white/5"><code>{
+  <span class="text-cyan-300">"candidate"</span>: <span class="text-emerald-300">"Simran Kumari"</span>,
+  <span class="text-cyan-300">"university"</span>: <span class="text-slate-300">"Birla Institute of Tech, Patna"</span>,
+  <span class="text-cyan-300">"degree"</span>: <span class="text-slate-300">"B.Tech Mechanical (2023-2027)"</span>,
+  <span class="text-cyan-300">"cgpa"</span>: <span class="text-amber-300">7.3</span>,
+  <span class="text-cyan-300">"research"</span>: <span class="text-slate-300">"IIT (BHU) Varanasi • CoE-MTD"</span>,
+  <span class="text-cyan-300">"specialization"</span>: [
+    <span class="text-purple-300">"Robotic CMT-based WAAM"</span>,
+    <span class="text-purple-300">"MERN Stack & RESTful APIs"</span>,
+    <span class="text-purple-300">"Data Structures & Algorithms"</span>,
+    <span class="text-purple-300">"AI-Hardware Interfacing (RPi/Arduino)"</span>
+  ],
+  <span class="text-cyan-300">"status"</span>: <span class="text-emerald-400">"Open for SWE & Robotics Roles"</span>
+}</code></pre>
+
+          <!-- Interactive Action Buttons -->
+          <div class="pt-2 flex items-center justify-between text-xs font-mono">
+            <span class="text-slate-400 flex items-center gap-1.5">
+              <i class="fas fa-map-pin text-rose-400"></i> Patna / Varanasi
+            </span>
+            <button onclick="copyProfileSpec()" class="text-cyan-400 hover:text-cyan-300 font-semibold flex items-center gap-1.5 transition">
+              <i class="fas fa-copy"></i> Copy Spec
+            </button>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ==========================================
+       RESEARCH EXPERIENCE & EDUCATION SECTION
+       ========================================== -->
+  <section id="experience" class="py-16 relative z-10 max-w-7xl mx-auto px-6 lg:px-8 border-t border-white/5">
+    <div class="text-center max-w-2xl mx-auto mb-14">
+      <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-cyan-950/40 border border-cyan-500/30 text-xs font-mono text-cyan-400 mb-2">
+        <i class="fas fa-microscope"></i> EXPERIENCE & FOUNDATIONS
+      </div>
+      <h2 class="text-3xl font-extrabold text-white">Research & Academic Background</h2>
+      <p class="text-slate-400 text-sm mt-2">Integrating advanced robotic manufacturing research with theoretical computer science.</p>
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-5xl mx-auto">
+      
+      <!-- Research Experience: IIT (BHU) -->
+      <div class="glass-panel-elevated rounded-3xl p-7 border border-cyan-500/20 hover:border-cyan-500/50 transition relative overflow-hidden group">
+        <div class="absolute top-0 right-0 w-32 h-32 bg-cyan-500/5 rounded-full blur-2xl group-hover:bg-cyan-500/10 transition"></div>
+        <div class="flex items-start justify-between mb-4">
+          <div class="w-12 h-12 rounded-2xl bg-cyan-500/10 text-cyan-400 flex items-center justify-center text-xl border border-cyan-500/20">
+            <i class="fas fa-robot"></i>
+          </div>
+          <span class="text-xs font-mono px-3 py-1 rounded-full bg-cyan-950/80 text-cyan-300 border border-cyan-500/30 font-semibold">
+            05/2026 - 06/2026
+          </span>
+        </div>
+        <h3 class="text-lg font-bold text-white group-hover:text-cyan-300 transition">Centre of Excellence on Machine Tools Design (CoE-MTD)</h3>
+        <p class="text-xs font-semibold text-cyan-400 mb-4">Summer Research Intern • IIT (BHU), Varanasi</p>
+        <ul class="text-xs text-slate-300 space-y-2.5 leading-relaxed">
+          <li class="flex items-start gap-2.5">
+            <i class="fas fa-check-circle text-cyan-400 text-xs mt-0.5 shrink-0"></i>
+            <span>Conducted core research on <strong>Robotic CMT-based WAAM</strong> (Cold Metal Transfer Wire Arc Additive Manufacturing), focusing on automated trajectory control and multi-axis deposition.</span>
+          </li>
+          <li class="flex items-start gap-2.5">
+            <i class="fas fa-check-circle text-cyan-400 text-xs mt-0.5 shrink-0"></i>
+            <span>Analyzed complex manufacturing datasets and sensor workflows to improve surface layer repeatability and optimize process efficiency.</span>
+          </li>
+          <li class="flex items-start gap-2.5">
+            <i class="fas fa-check-circle text-cyan-400 text-xs mt-0.5 shrink-0"></i>
+            <span>Collaborated with IIT faculty to evaluate computational designs, translating physical telemetry into actionable algorithmic models.</span>
+          </li>
+        </ul>
+      </div>
+
+      <!-- Education: BIT Patna -->
+      <div class="glass-panel-elevated rounded-3xl p-7 border border-purple-500/20 hover:border-purple-500/50 transition relative overflow-hidden group">
+        <div class="absolute top-0 right-0 w-32 h-32 bg-purple-500/5 rounded-full blur-2xl group-hover:bg-purple-500/10 transition"></div>
+        <div class="flex items-start justify-between mb-4">
+          <div class="w-12 h-12 rounded-2xl bg-purple-500/10 text-purple-400 flex items-center justify-center text-xl border border-purple-500/20">
+            <i class="fas fa-graduation-cap"></i>
+          </div>
+          <span class="text-xs font-mono px-3 py-1 rounded-full bg-purple-950/80 text-purple-300 border border-purple-500/30 font-semibold">
+            01/2023 - 01/2027
+          </span>
+        </div>
+        <h3 class="text-lg font-bold text-white group-hover:text-purple-300 transition">B.Tech in Mechanical Engineering</h3>
+        <p class="text-xs font-semibold text-purple-400 mb-4">Birla Institute of Technology, Patna • <span class="text-emerald-400 font-bold">CGPA: 7.3/10</span></p>
+        <div class="text-xs text-slate-300 space-y-2.5 leading-relaxed">
+          <p>Four-year interdisciplinary degree uniting robotics engineering, kinematics, algorithmic modeling, and database systems.</p>
+          <div class="pt-2">
+            <span class="font-mono text-[11px] text-slate-400 block mb-2 font-semibold uppercase">Relevant Coursework:</span>
+            <div class="flex flex-wrap gap-2">
+              <span class="px-2.5 py-1 bg-slate-900 border border-white/10 text-slate-300 rounded-lg text-[11px]">Data Structures & Algorithms</span>
+              <span class="px-2.5 py-1 bg-slate-900 border border-white/10 text-slate-300 rounded-lg text-[11px]">Robotics Engineering</span>
+              <span class="px-2.5 py-1 bg-slate-900 border border-white/10 text-slate-300 rounded-lg text-[11px]">DBMS</span>
+              <span class="px-2.5 py-1 bg-slate-900 border border-white/10 text-slate-300 rounded-lg text-[11px]">Machine Designing</span>
+              <span class="px-2.5 py-1 bg-slate-900 border border-white/10 text-slate-300 rounded-lg text-[11px]">Computer-Aided Design</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ==============================================================
+       INTERACTIVE PROJECT SHOWCASES WITH FULLY PLAYABLE LIVE DEMOS
+       ============================================================== -->
+  <section id="projects" class="py-16 relative z-10 max-w-7xl mx-auto px-6 lg:px-8 border-t border-white/5">
+    <div class="text-center max-w-3xl mx-auto mb-16">
+      <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-cyan-950/40 border border-cyan-500/30 text-xs font-mono text-cyan-400 mb-2">
+        <i class="fas fa-terminal"></i> PLAYABLE LIVE WORKSPACES
+      </div>
+      <h2 class="text-3xl sm:text-4xl font-extrabold text-white">Interactive Project Demos</h2>
+      <p class="text-slate-400 text-sm mt-2">
+        Test each project directly below without leaving the page. Built with responsive controls, real-time calculations, simulated IoT circuits, and viewports.
+      </p>
+
+      <!-- Fast Anchor Bar -->
+      <div class="flex flex-wrap items-center justify-center gap-3 mt-6">
+        <a href="#demo-loan" class="px-4 py-2 rounded-xl text-xs font-semibold glass-panel hover:bg-cyan-500/20 text-cyan-300 border border-cyan-500/30 transition flex items-center gap-2">
+          <i class="fas fa-hand-holding-dollar"></i> Demo 1: Loan Manager & CRM
+        </a>
+        <a href="#demo-fire" class="px-4 py-2 rounded-xl text-xs font-semibold glass-panel hover:bg-rose-500/20 text-rose-300 border border-rose-500/30 transition flex items-center gap-2">
+          <i class="fas fa-fire-extinguisher"></i> Demo 2: AI Fire Extinguisher Sim
+        </a>
+        <a href="#demo-beauty" class="px-4 py-2 rounded-xl text-xs font-semibold glass-panel hover:bg-emerald-500/20 text-emerald-300 border border-emerald-500/30 transition flex items-center gap-2">
+          <i class="fas fa-mobile-screen"></i> Demo 3: Beauty_Care Sandbox
+        </a>
+      </div>
+    </div>
+
+    <div class="space-y-20">
+      
+      <!-- =========================================================
+           PROJECT 1: LOAN MANAGER APP & NODEMAILER DISPATCHER DEMO
+           ========================================================= -->
+      <div id="demo-loan" class="glass-panel-elevated rounded-3xl border border-cyan-500/30 p-6 sm:p-10 shadow-2xl relative overflow-hidden">
+        
+        <!-- Project Header -->
+        <div class="flex flex-wrap items-center justify-between gap-4 pb-6 border-b border-white/10">
+          <div>
+            <div class="flex items-center gap-2.5">
+              <span class="px-3 py-1 rounded-full text-[11px] font-mono bg-cyan-500/20 text-cyan-300 border border-cyan-500/30 font-semibold">MERN Stack • Nodemailer • RESTful APIs</span>
+              <span class="text-xs text-slate-400 font-mono">07/2026 - 09/2026</span>
+            </div>
+            <h3 class="text-2xl font-bold text-white mt-1.5">Project 1: Loan Manager App & Nodemailer Dispatcher</h3>
+            <p class="text-xs sm:text-sm text-slate-300 mt-1 max-w-3xl">
+              Engineered a full-stack loan tracking and borrower management platform using React.js, Node.js, Express.js, and MongoDB. Includes structured MongoDB schemas, dynamic amortization computations, and automated Nodemailer email notifications for repayment alerts.
+            </p>
+          </div>
+          <div class="flex items-center gap-2 bg-cyan-950/70 border border-cyan-500/30 px-3 py-1.5 rounded-full">
+            <span class="w-2.5 h-2.5 rounded-full bg-cyan-400 animate-ping"></span>
+            <span class="text-xs font-mono text-cyan-300 uppercase tracking-wider font-bold">Interactive Live Demo</span>
+          </div>
+        </div>
+
+        <!-- Interactive 2-Column Split: EMI Engine vs Borrower CRM -->
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 mt-8">
+          
+          <!-- Column 1: Reactive EMI Calculator with Visual Ratio Ring -->
+          <div class="lg:col-span-6 bg-slate-950/80 rounded-2xl p-6 border border-white/10 space-y-5">
+            <div class="flex items-center justify-between border-b border-white/5 pb-3">
+              <h4 class="text-sm font-bold text-white flex items-center gap-2">
+                <i class="fas fa-calculator text-cyan-400"></i> Dynamic EMI & Interest Engine
+              </h4>
+              <span class="text-[10px] font-mono text-slate-400">Formula: P × r × (1+r)ⁿ / ((1+r)ⁿ - 1)</span>
+            </div>
+
+            <!-- Principal Slider -->
+            <div>
+              <div class="flex justify-between text-xs font-semibold mb-1.5">
+                <span class="text-slate-300">Loan Principal:</span>
+                <span id="loan-amount-val" class="font-mono text-cyan-400 text-sm font-bold">₹5,00,000</span>
+              </div>
+              <input type="range" id="loan-amount-slider" min="20000" max="3000000" step="10000" value="500000" class="w-full h-2 bg-slate-800 rounded-lg cursor-pointer">
+              <div class="flex justify-between text-[10px] text-slate-500 font-mono mt-1">
+                <span>₹20,000</span>
+                <span>₹15,00,000</span>
+                <span>₹30,00,000</span>
+              </div>
+            </div>
+
+            <!-- Interest Rate Slider -->
+            <div>
+              <div class="flex justify-between text-xs font-semibold mb-1.5">
+                <span class="text-slate-300">Annual Interest Rate (%):</span>
+                <span id="loan-rate-val" class="font-mono text-purple-400 text-sm font-bold">11.0%</span>
+              </div>
+              <input type="range" id="loan-rate-slider" min="5" max="24" step="0.5" value="11" class="w-full h-2 bg-slate-800 rounded-lg cursor-pointer">
+              <div class="flex justify-between text-[10px] text-slate-500 font-mono mt-1">
+                <span>5.0%</span>
+                <span>14.5%</span>
+                <span>24.0%</span>
+              </div>
+            </div>
+
+            <!-- Tenure Slider -->
+            <div>
+              <div class="flex justify-between text-xs font-semibold mb-1.5">
+                <span class="text-slate-300">Repayment Period:</span>
+                <span id="loan-tenure-val" class="font-mono text-emerald-400 text-sm font-bold">36 Months (3.0 Yrs)</span>
+              </div>
+              <input type="range" id="loan-tenure-slider" min="6" max="84" step="6" value="36" class="w-full h-2 bg-slate-800 rounded-lg cursor-pointer">
+              <div class="flex justify-between text-[10px] text-slate-500 font-mono mt-1">
+                <span>6 Months</span>
+                <span>48 Months</span>
+                <span>84 Months</span>
+              </div>
+            </div>
+
+            <!-- Live Output Matrix -->
+            <div class="grid grid-cols-3 gap-2.5 pt-1">
+              <div class="bg-cyan-950/40 border border-cyan-500/20 rounded-xl p-3 text-center">
+                <span class="text-[10px] font-mono text-cyan-400 uppercase">Monthly EMI</span>
+                <div id="loan-emi-output" class="text-base sm:text-lg font-bold text-white font-mono mt-1">₹16,369</div>
+              </div>
+              <div class="bg-purple-950/40 border border-purple-500/20 rounded-xl p-3 text-center">
+                <span class="text-[10px] font-mono text-purple-400 uppercase">Total Interest</span>
+                <div id="loan-interest-output" class="text-base sm:text-lg font-bold text-white font-mono mt-1">₹89,284</div>
+              </div>
+              <div class="bg-emerald-950/40 border border-emerald-500/20 rounded-xl p-3 text-center">
+                <span class="text-[10px] font-mono text-emerald-400 uppercase">Total Payable</span>
+                <div id="loan-total-output" class="text-base sm:text-lg font-bold text-white font-mono mt-1">₹5,89,284</div>
+              </div>
+            </div>
+
+            <!-- Visual Principal vs Interest Progress Bar -->
+            <div>
+              <div class="flex justify-between text-[11px] text-slate-400 mb-1.5 font-mono">
+                <span>Principal: <strong id="loan-p-ratio" class="text-cyan-400">85%</strong></span>
+                <span>Interest: <strong id="loan-i-ratio" class="text-purple-400">15%</strong></span>
+              </div>
+              <div class="w-full h-2.5 bg-slate-800 rounded-full overflow-hidden flex">
+                <div id="loan-p-bar" class="bg-cyan-500 h-full transition-all duration-300" style="width: 85%;"></div>
+                <div id="loan-i-bar" class="bg-purple-500 h-full transition-all duration-300" style="width: 15%;"></div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Column 2: Borrower CRM Ledger & Nodemailer Dispatch Simulator -->
+          <div class="lg:col-span-6 bg-slate-950/80 rounded-2xl p-6 border border-white/10 flex flex-col justify-between">
+            <div>
+              <div class="flex items-center justify-between pb-3 border-b border-white/5 mb-3">
+                <h4 class="text-sm font-bold text-white flex items-center gap-2">
+                  <i class="fas fa-users-gear text-emerald-400"></i> Borrower CRM & Nodemailer Dispatch
+                </h4>
+                <button onclick="addCalculatedLoanToCRM()" class="px-2.5 py-1 rounded-lg text-[11px] font-semibold bg-cyan-600 hover:bg-cyan-500 text-white transition flex items-center gap-1.5 shadow">
+                  <i class="fas fa-user-plus text-[10px]"></i> Add Current Calculation
+                </button>
+              </div>
+
+              <!-- Borrower Records List -->
+              <div id="borrower-records-list" class="space-y-2 max-h-[220px] overflow-y-auto pr-1">
+                <!-- Dynamically injected rows -->
+              </div>
+            </div>
+
+            <!-- Real-Time Nodemailer Relay Terminal -->
+            <div class="mt-4 pt-3 border-t border-white/10">
+              <div class="flex items-center justify-between text-[11px] font-mono mb-1.5">
+                <span class="text-slate-400 flex items-center gap-1.5">
+                  <i class="fas fa-network-wired text-cyan-400"></i> Nodemailer SMTP Dispatcher Log:
+                </span>
+                <span id="nodemailer-status-badge" class="text-emerald-400 bg-emerald-950/70 px-2 py-0.5 rounded border border-emerald-500/30 text-[10px]">STATUS: READY</span>
+              </div>
+              <div id="nodemailer-terminal" class="bg-black/70 rounded-xl p-3 text-[11px] font-mono text-slate-300 border border-white/5 h-24 overflow-y-auto space-y-1">
+                <span class="text-slate-500">// Ready. Click "Send Nodemailer Notification" on any borrower to test automated email dispatches.</span>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+
+      <!-- ==============================================================
+           PROJECT 2: AI-BASED AUTOMATED FIRE EXTINGUISHER SYSTEM SIM
+           ============================================================== -->
+      <div id="demo-fire" class="glass-panel-elevated rounded-3xl border border-rose-500/30 p-6 sm:p-10 shadow-2xl relative overflow-hidden">
+        
+        <!-- Project Header -->
+        <div class="flex flex-wrap items-center justify-between gap-4 pb-6 border-b border-white/10">
+          <div>
+            <div class="flex items-center gap-2.5">
+              <span class="px-3 py-1 rounded-full text-[11px] font-mono bg-rose-500/20 text-rose-300 border border-rose-500/30 font-semibold">Arduino • Raspberry Pi • PyTorch AI Voice • Sensors</span>
+              <span class="text-xs text-slate-400 font-mono">01/2026 - 04/2026</span>
+            </div>
+            <h3 class="text-2xl font-bold text-white mt-1.5">Project 2: AI-Based Automated Fire Extinguisher System</h3>
+            <p class="text-xs sm:text-sm text-slate-300 mt-1 max-w-3xl">
+              Engineered an automated emergency suppression system using Arduino Nano and Raspberry Pi. Features real-time multi-sensor telemetry (temperature, smoke PPM, optical IR flame), AI keyword voice recognition ("Fire Alert"), and automated servo nozzle directional deployment.
+            </p>
+          </div>
+          <div class="flex items-center gap-2 bg-rose-950/70 border border-rose-500/30 px-3 py-1.5 rounded-full">
+            <span class="w-2.5 h-2.5 rounded-full bg-rose-400 animate-ping"></span>
+            <span class="text-xs font-mono text-rose-300 uppercase tracking-wider font-bold">Live Hardware Simulator</span>
+          </div>
+        </div>
+
+        <!-- Interactive Hardware Console -->
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 mt-8">
+          
+          <!-- Column 1: Multi-Sensor Inputs & Voice Trigger -->
+          <div class="lg:col-span-5 bg-slate-950/80 rounded-2xl p-6 border border-white/10 space-y-5">
+            <div class="flex items-center justify-between border-b border-white/5 pb-3">
+              <h4 class="text-sm font-bold text-white flex items-center gap-2">
+                <i class="fas fa-sliders text-rose-400"></i> Environmental Sensor Inputs
+              </h4>
+              <span class="text-[10px] font-mono text-slate-400">Arduino ADC Bus (10-bit)</span>
+            </div>
+
+            <!-- Temperature Slider -->
+            <div>
+              <div class="flex justify-between text-xs font-semibold mb-1">
+                <span class="text-slate-300">Room Temperature (°C):</span>
+                <span id="fire-temp-val" class="font-mono text-amber-400 font-bold">28°C (Normal)</span>
+              </div>
+              <input type="range" id="fire-temp-slider" min="20" max="120" value="28" class="w-full h-2 bg-slate-800 rounded-lg cursor-pointer">
+              <div class="flex justify-between text-[10px] text-slate-500 font-mono mt-1">
+                <span>20°C</span>
+                <span class="text-rose-400">Trigger Threshold: >65°C</span>
+                <span>120°C</span>
+              </div>
+            </div>
+
+            <!-- Smoke Level Slider -->
+            <div>
+              <div class="flex justify-between text-xs font-semibold mb-1">
+                <span class="text-slate-300">Smoke Density (PPM):</span>
+                <span id="fire-smoke-val" class="font-mono text-slate-300 font-bold">85 PPM</span>
+              </div>
+              <input type="range" id="fire-smoke-slider" min="20" max="900" value="85" class="w-full h-2 bg-slate-800 rounded-lg cursor-pointer">
+              <div class="flex justify-between text-[10px] text-slate-500 font-mono mt-1">
+                <span>20 PPM</span>
+                <span class="text-rose-400">Trigger Threshold: >400 PPM</span>
+                <span>900 PPM</span>
+              </div>
+            </div>
+
+            <!-- Optical IR Flame Sensor Toggle -->
+            <div class="p-3.5 rounded-xl bg-slate-900 border border-white/5 flex items-center justify-between">
+              <div>
+                <span class="text-xs font-semibold text-white block">Infrared Optical Flame Sensor</span>
+                <span class="text-[10px] text-slate-400">Photodiode (760nm–1100nm spectrum)</span>
+              </div>
+              <button id="flame-ir-toggle" onclick="toggleOpticalFlameSensor()" class="px-3 py-1.5 rounded-lg text-xs font-mono font-bold bg-slate-800 text-slate-300 border border-white/10 hover:border-rose-400 transition">
+                INACTIVE
+              </button>
+            </div>
+
+            <!-- Action Buttons: AI Voice & Reset -->
+            <div class="grid grid-cols-2 gap-2 pt-1">
+              <button onclick="triggerVoiceKeyword()" class="p-3 rounded-xl bg-purple-600/30 hover:bg-purple-600/50 border border-purple-500/40 text-purple-200 text-xs font-bold flex items-center justify-center gap-2 transition">
+                <i class="fas fa-microphone text-sm"></i> Voice: "FIRE ALERT!"
+              </button>
+              <button onclick="resetFireSimulator()" class="p-3 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-300 text-xs font-bold flex items-center justify-center gap-2 transition">
+                <i class="fas fa-rotate-left"></i> Reset System
+              </button>
+            </div>
+          </div>
+
+          <!-- Column 2: System Status, Targeting Canvas & Telemetry -->
+          <div class="lg:col-span-7 bg-slate-950/80 rounded-2xl p-6 border border-white/10 flex flex-col justify-between">
+            <div>
+              <!-- Big Status Alert Bar -->
+              <div id="fire-status-banner" class="p-4 rounded-2xl bg-emerald-950/40 border border-emerald-500/40 flex items-center justify-between mb-5 transition-all duration-300">
+                <div class="flex items-center gap-3">
+                  <div id="fire-status-icon" class="w-10 h-10 rounded-xl bg-emerald-500/20 text-emerald-400 flex items-center justify-center text-lg">
+                    <i class="fas fa-shield-halved"></i>
+                  </div>
+                  <div>
+                    <span class="text-[10px] font-mono uppercase text-emerald-400 block tracking-wider font-semibold">CIRCUIT INTEGRITY</span>
+                    <h5 id="fire-status-title" class="text-sm sm:text-base font-bold text-white">SYSTEM NORMAL • MONITORING</h5>
+                  </div>
+                </div>
+                <div class="text-right">
+                  <span id="gpio-status-badge" class="text-xs font-mono px-2.5 py-1 rounded bg-slate-900 text-slate-400 border border-white/10">GPIO PIN 18: LOW</span>
+                  <div id="ai-confidence-badge" class="text-[10px] font-mono text-slate-400 mt-1">AI Confidence: 0%</div>
+                </div>
+              </div>
+
+              <!-- Graphic: 2D Interactive Servo Aiming Display -->
+              <div class="grid grid-cols-2 gap-4 mb-4">
+                
+                <!-- Servo Direction Canvas/Arm -->
+                <div class="p-4 rounded-xl bg-slate-900 border border-white/5 text-center">
+                  <span class="text-[10px] font-mono text-slate-400 block mb-2 uppercase tracking-wider">SERVO TARGETING NOZZLE</span>
+                  <div class="w-20 h-20 mx-auto relative flex items-center justify-center">
+                    <div id="servo-needle" class="w-1.5 h-14 bg-cyan-400 origin-bottom transition-transform duration-700 transform rotate-0 rounded-full shadow-lg shadow-cyan-500/50"></div>
+                    <div class="absolute bottom-0 w-5 h-5 rounded-full bg-slate-800 border-2 border-cyan-400"></div>
+                  </div>
+                  <span id="servo-angle-caption" class="text-xs font-mono text-cyan-300 font-bold block mt-2">0° (Centered Standby)</span>
+                </div>
+
+                <!-- Valve & Pressure Status -->
+                <div class="p-4 rounded-xl bg-slate-900 border border-white/5 text-center flex flex-col justify-between">
+                  <span class="text-[10px] font-mono text-slate-400 block uppercase tracking-wider">SOLENOID VALVE</span>
+                  <div class="my-auto">
+                    <div id="solenoid-badge" class="inline-block px-3 py-1.5 rounded-full text-xs font-mono font-bold bg-slate-800 text-slate-400 border border-white/10">
+                      VALVE CLOSED [0 kPa]
+                    </div>
+                  </div>
+                  <span id="solenoid-subtext" class="text-[11px] text-slate-400 block">Pressurized Agent: Standby</span>
+                </div>
+
+              </div>
+            </div>
+
+            <!-- Telemetry & Hardware Log Console -->
+            <div>
+              <span class="text-[10px] font-mono text-slate-400 uppercase tracking-wider block mb-1">Raspberry Pi & Arduino Serial Log (/dev/ttyACM0):</span>
+              <div id="fire-serial-terminal" class="bg-black/70 rounded-xl p-3 text-[11px] font-mono text-emerald-400 border border-white/5 h-24 overflow-y-auto space-y-1">
+                <div>[BOOT] Arduino Nano telemetry loop running (Polling period: 100ms)</div>
+                <div>[MODEL] Raspberry Pi PyTorch Lite speech keyword model loaded.</div>
+                <div>[STATUS] Sensor baselines: Temp=28C, Smoke=85PPM. All clear.</div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+
+      <!-- ==============================================================
+           PROJECT 3: BEAUTY_CARE RESPONSIVE E-COMMERCE SANDBOX DEMO
+           ============================================================== -->
+      <div id="demo-beauty" class="glass-panel-elevated rounded-3xl border border-emerald-500/30 p-6 sm:p-10 shadow-2xl relative overflow-hidden">
+        
+        <!-- Project Header -->
+        <div class="flex flex-wrap items-center justify-between gap-4 pb-6 border-b border-white/10">
+          <div>
+            <div class="flex items-center gap-2.5">
+              <span class="px-3 py-1 rounded-full text-[11px] font-mono bg-emerald-500/20 text-emerald-300 border border-emerald-500/30 font-semibold">Mobile-First UI • PageSpeed 99 • Flexbox</span>
+              <span class="text-xs text-slate-400 font-mono">05/2025 - 07/2025</span>
+            </div>
+            <h3 class="text-2xl font-bold text-white mt-1.5">Project 3: Beauty_Care Responsive E-Commerce Sandbox</h3>
+            <p class="text-xs sm:text-sm text-slate-300 mt-1 max-w-3xl">
+              Engineered a high-performance, mobile-first responsive landing page and store. Achieved 98% cross-device compatibility and a 40% speed boost on Google PageSpeed Insights. Switch viewports and interact with the catalog below.
+            </p>
+          </div>
+          <div class="flex items-center gap-2 bg-emerald-950/70 border border-emerald-500/30 px-3 py-1.5 rounded-full">
+            <span class="w-2.5 h-2.5 rounded-full bg-emerald-400 animate-ping"></span>
+            <span class="text-xs font-mono text-emerald-300 uppercase tracking-wider font-bold">Interactive Sandbox</span>
+          </div>
+        </div>
+
+        <!-- Viewport Switcher & PageSpeed Metric Bar -->
+        <div class="flex flex-wrap items-center justify-between gap-4 mt-8 mb-6">
+          <div class="flex items-center gap-1.5 p-1.5 rounded-2xl bg-slate-900 border border-white/10 text-xs">
+            <span class="text-slate-400 px-2 font-mono text-[11px]">Preview Device:</span>
+            <button onclick="setBeautyViewport('mobile')" id="vp-tab-mobile" class="px-3.5 py-1.5 rounded-xl font-bold bg-emerald-500/20 text-emerald-300 border border-emerald-500/40 transition flex items-center gap-1.5">
+              <i class="fas fa-mobile-screen"></i> Mobile (375px)
+            </button>
+            <button onclick="setBeautyViewport('tablet')" id="vp-tab-tablet" class="px-3.5 py-1.5 rounded-xl font-bold text-slate-400 hover:text-white transition flex items-center gap-1.5">
+              <i class="fas fa-tablet-screen-button"></i> Tablet (680px)
+            </button>
+            <button onclick="setBeautyViewport('desktop')" id="vp-tab-desktop" class="px-3.5 py-1.5 rounded-xl font-bold text-slate-400 hover:text-white transition flex items-center gap-1.5">
+              <i class="fas fa-laptop"></i> Desktop (100%)
+            </button>
+          </div>
+
+          <!-- PageSpeed Metrics -->
+          <div class="flex items-center gap-3 text-xs font-mono">
+            <div class="flex items-center gap-1.5 bg-slate-900 px-3 py-1.5 rounded-xl border border-white/10">
+              <i class="fas fa-bolt text-amber-400"></i>
+              <span class="text-slate-400">PageSpeed:</span>
+              <strong class="text-emerald-400 font-bold">99 / 100</strong>
+            </div>
+            <div class="flex items-center gap-1.5 bg-slate-900 px-3 py-1.5 rounded-xl border border-white/10">
+              <i class="fas fa-mobile-screen text-cyan-400"></i>
+              <span class="text-slate-400">Mobile Match:</span>
+              <strong class="text-cyan-400 font-bold">98%</strong>
+            </div>
+            <div class="flex items-center gap-1.5 bg-slate-900 px-3 py-1.5 rounded-xl border border-white/10">
+              <i class="fas fa-arrow-trend-up text-purple-400"></i>
+              <span class="text-slate-400">Load Optimization:</span>
+              <strong class="text-purple-400 font-bold">+40%</strong>
+            </div>
+          </div>
+        </div>
+
+        <!-- Embedded Interactive Device Sandbox Frame -->
+        <div class="bg-black/60 p-4 sm:p-6 rounded-3xl border border-white/10 flex justify-center items-center overflow-x-auto min-h-[460px]">
+          <div id="beauty-device-viewport" class="w-[375px] transition-all duration-300 bg-slate-900 rounded-3xl border-4 border-slate-700 shadow-2xl p-5 overflow-hidden">
+            
+            <!-- Mini Header -->
+            <div class="flex items-center justify-between pb-3 border-b border-slate-800 mb-4">
+              <div class="flex items-center gap-2">
+                <i class="fas fa-leaf text-emerald-400 text-sm"></i>
+                <span class="font-extrabold text-xs tracking-wider text-white">BEAUTY_CARE</span>
+              </div>
+              <div class="flex items-center gap-3 text-xs">
+                <button onclick="openMiniCartModal()" class="relative text-slate-300 hover:text-white transition">
+                  <i class="fas fa-bag-shopping text-sm"></i>
+                  <span id="mini-cart-pill" class="absolute -top-1.5 -right-2 bg-emerald-500 text-black text-[9px] font-extrabold rounded-full w-4 h-4 flex items-center justify-center">0</span>
+                </button>
+              </div>
+            </div>
+
+            <!-- Mini Hero Promo -->
+            <div class="p-3.5 rounded-2xl bg-gradient-to-r from-emerald-600/30 to-teal-700/30 border border-emerald-500/20 mb-4 text-center">
+              <span class="text-[10px] font-mono uppercase text-emerald-300 block font-bold">Cruelty-Free • 100% Vegan</span>
+              <h5 class="text-xs sm:text-sm font-extrabold text-white mt-0.5">Hydrating Botanical Essentials</h5>
+            </div>
+
+            <!-- Category Filter Tabs -->
+            <div class="flex gap-1.5 mb-4 overflow-x-auto pb-1 text-[11px] font-semibold">
+              <button onclick="filterMiniShop('all')" class="mini-filter-tab px-3 py-1 rounded-lg bg-emerald-500 text-black font-bold">All</button>
+              <button onclick="filterMiniShop('skincare')" class="mini-filter-tab px-3 py-1 rounded-lg bg-slate-800 text-slate-300">Skincare</button>
+              <button onclick="filterMiniShop('haircare')" class="mini-filter-tab px-3 py-1 rounded-lg bg-slate-800 text-slate-300">Haircare</button>
+              <button onclick="filterMiniShop('organic')" class="mini-filter-tab px-3 py-1 rounded-lg bg-slate-800 text-slate-300">Organic</button>
+            </div>
+
+            <!-- Mini Product Catalog Cards -->
+            <div id="mini-shop-grid" class="grid grid-cols-2 gap-2.5 max-h-[230px] overflow-y-auto pr-1">
+              <!-- Dynamically populated products -->
+            </div>
+
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ==========================================
+       TECHNICAL SKILLS MATRIX (FILTERABLE)
+       ========================================== -->
+  <section id="skills" class="py-16 relative z-10 max-w-7xl mx-auto px-6 lg:px-8 border-t border-white/5">
+    <div class="text-center max-w-2xl mx-auto mb-14">
+      <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-cyan-950/40 border border-cyan-500/30 text-xs font-mono text-cyan-400 mb-2">
+        <i class="fas fa-cubes"></i> CORE COMPETENCIES
+      </div>
+      <h2 class="text-3xl font-extrabold text-white">Technical Skills & Tooling</h2>
+      <p class="text-slate-400 text-sm mt-2">Filter and inspect engineering proficiency across languages, web tech, systems, and hardware.</p>
+      
+      <!-- Filter Tags -->
+      <div class="flex flex-wrap items-center justify-center gap-2 mt-6">
+        <button onclick="filterSkills('all')" class="skill-btn active px-3.5 py-1.5 rounded-xl text-xs font-bold bg-cyan-500 text-black transition">All</button>
+        <button onclick="filterSkills('lang')" class="skill-btn px-3.5 py-1.5 rounded-xl text-xs font-bold bg-slate-800 text-slate-300 hover:text-white transition">Languages</button>
+        <button onclick="filterSkills('web')" class="skill-btn px-3.5 py-1.5 rounded-xl text-xs font-bold bg-slate-800 text-slate-300 hover:text-white transition">Web Technology</button>
+        <button onclick="filterSkills('core')" class="skill-btn px-3.5 py-1.5 rounded-xl text-xs font-bold bg-slate-800 text-slate-300 hover:text-white transition">Core CS</button>
+        <button onclick="filterSkills('robotics')" class="skill-btn px-3.5 py-1.5 rounded-xl text-xs font-bold bg-slate-800 text-slate-300 hover:text-white transition">Robotics & AI</button>
+      </div>
+    </div>
+
+    <!-- Skills Cards Grid -->
+    <div id="skills-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 max-w-6xl mx-auto">
+      
+      <!-- Languages -->
+      <div class="skill-card p-6 rounded-2xl glass-panel-elevated border border-white/10 hover:border-cyan-500/40 transition" data-cat="lang">
+        <div class="flex items-center justify-between mb-4">
+          <div class="flex items-center gap-3">
+            <div class="w-10 h-10 rounded-xl bg-cyan-500/10 text-cyan-400 flex items-center justify-center text-lg"><i class="fas fa-code"></i></div>
+            <h4 class="font-bold text-white text-sm">Languages</h4>
+          </div>
+          <span class="text-[10px] font-mono text-cyan-400 bg-cyan-950/60 px-2 py-0.5 rounded">Core Code</span>
+        </div>
+        <div class="space-y-3">
+          <div>
+            <div class="flex justify-between text-xs font-mono text-slate-300 mb-1"><span>C++ / C</span><span class="text-cyan-400">Advanced (DSA)</span></div>
+            <div class="w-full h-1.5 bg-slate-800 rounded-full overflow-hidden"><div class="bg-cyan-400 h-full w-[90%]"></div></div>
+          </div>
+          <div>
+            <div class="flex justify-between text-xs font-mono text-slate-300 mb-1"><span>Python</span><span class="text-cyan-400">Data & ML Integration</span></div>
+            <div class="w-full h-1.5 bg-slate-800 rounded-full overflow-hidden"><div class="bg-cyan-400 h-full w-[85%]"></div></div>
+          </div>
+          <div>
+            <div class="flex justify-between text-xs font-mono text-slate-300 mb-1"><span>Java & SQL</span><span class="text-cyan-400">OOP & Queries</span></div>
+            <div class="w-full h-1.5 bg-slate-800 rounded-full overflow-hidden"><div class="bg-cyan-400 h-full w-[80%]"></div></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Web Technology -->
+      <div class="skill-card p-6 rounded-2xl glass-panel-elevated border border-white/10 hover:border-purple-500/40 transition" data-cat="web">
+        <div class="flex items-center justify-between mb-4">
+          <div class="flex items-center gap-3">
+            <div class="w-10 h-10 rounded-xl bg-purple-500/10 text-purple-400 flex items-center justify-center text-lg"><i class="fab fa-react"></i></div>
+            <h4 class="font-bold text-white text-sm">Web Stack</h4>
+          </div>
+          <span class="text-[10px] font-mono text-purple-400 bg-purple-950/60 px-2 py-0.5 rounded">Frontend & APIs</span>
+        </div>
+        <div class="space-y-3">
+          <div>
+            <div class="flex justify-between text-xs font-mono text-slate-300 mb-1"><span>React.js & Node.js</span><span class="text-purple-400">Full-Stack MERN</span></div>
+            <div class="w-full h-1.5 bg-slate-800 rounded-full overflow-hidden"><div class="bg-purple-400 h-full w-[88%]"></div></div>
+          </div>
+          <div>
+            <div class="flex justify-between text-xs font-mono text-slate-300 mb-1"><span>Angular & TypeScript</span><span class="text-purple-400">Infosys Certified</span></div>
+            <div class="w-full h-1.5 bg-slate-800 rounded-full overflow-hidden"><div class="bg-purple-400 h-full w-[85%]"></div></div>
+          </div>
+          <div>
+            <div class="flex justify-between text-xs font-mono text-slate-300 mb-1"><span>HTML5, CSS3, JS</span><span class="text-purple-400">98% Viewport Score</span></div>
+            <div class="w-full h-1.5 bg-slate-800 rounded-full overflow-hidden"><div class="bg-purple-400 h-full w-[95%]"></div></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Core CS -->
+      <div class="skill-card p-6 rounded-2xl glass-panel-elevated border border-white/10 hover:border-emerald-500/40 transition" data-cat="core">
+        <div class="flex items-center justify-between mb-4">
+          <div class="flex items-center gap-3">
+            <div class="w-10 h-10 rounded-xl bg-emerald-500/10 text-emerald-400 flex items-center justify-center text-lg"><i class="fas fa-brain"></i></div>
+            <h4 class="font-bold text-white text-sm">Core CS Concepts</h4>
+          </div>
+          <span class="text-[10px] font-mono text-emerald-400 bg-emerald-950/60 px-2 py-0.5 rounded">Fundamentals</span>
+        </div>
+        <div class="space-y-3">
+          <div>
+            <div class="flex justify-between text-xs font-mono text-slate-300 mb-1"><span>Data Structures & Algo</span><span class="text-emerald-400">Problem Solving</span></div>
+            <div class="w-full h-1.5 bg-slate-800 rounded-full overflow-hidden"><div class="bg-emerald-400 h-full w-[88%]"></div></div>
+          </div>
+          <div>
+            <div class="flex justify-between text-xs font-mono text-slate-300 mb-1"><span>OOP & DBMS</span><span class="text-emerald-400">Relational & Document</span></div>
+            <div class="w-full h-1.5 bg-slate-800 rounded-full overflow-hidden"><div class="bg-emerald-400 h-full w-[86%]"></div></div>
+          </div>
+          <div>
+            <div class="flex justify-between text-xs font-mono text-slate-300 mb-1"><span>OS & Networks</span><span class="text-emerald-400">Protocols & Threads</span></div>
+            <div class="w-full h-1.5 bg-slate-800 rounded-full overflow-hidden"><div class="bg-emerald-400 h-full w-[82%]"></div></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Robotics & Hardware -->
+      <div class="skill-card p-6 rounded-2xl glass-panel-elevated border border-white/10 hover:border-amber-500/40 transition" data-cat="robotics">
+        <div class="flex items-center justify-between mb-4">
+          <div class="flex items-center gap-3">
+            <div class="w-10 h-10 rounded-xl bg-amber-500/10 text-amber-400 flex items-center justify-center text-lg"><i class="fas fa-gear"></i></div>
+            <h4 class="font-bold text-white text-sm">Robotics & Hardware</h4>
+          </div>
+          <span class="text-[10px] font-mono text-amber-400 bg-amber-950/60 px-2 py-0.5 rounded">Cyber-Physical</span>
+        </div>
+        <div class="space-y-3">
+          <div>
+            <div class="flex justify-between text-xs font-mono text-slate-300 mb-1"><span>Robotic WAAM Automation</span><span class="text-amber-400">IIT (BHU) Research</span></div>
+            <div class="w-full h-1.5 bg-slate-800 rounded-full overflow-hidden"><div class="bg-amber-400 h-full w-[90%]"></div></div>
+          </div>
+          <div>
+            <div class="flex justify-between text-xs font-mono text-slate-300 mb-1"><span>Arduino & Raspberry Pi</span><span class="text-amber-400">Sensor & GPIO Control</span></div>
+            <div class="w-full h-1.5 bg-slate-800 rounded-full overflow-hidden"><div class="bg-amber-400 h-full w-[88%]"></div></div>
+          </div>
+          <div>
+            <div class="flex justify-between text-xs font-mono text-slate-300 mb-1"><span>AI Voice Recognition</span><span class="text-amber-400">Edge Classification</span></div>
+            <div class="w-full h-1.5 bg-slate-800 rounded-full overflow-hidden"><div class="bg-amber-400 h-full w-[84%]"></div></div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ==========================================
+       HONORS & CERTIFICATIONS SECTION
+       ========================================== -->
+  <section id="awards" class="py-16 relative z-10 max-w-7xl mx-auto px-6 lg:px-8 border-t border-white/5">
+    <div class="text-center max-w-2xl mx-auto mb-14">
+      <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-cyan-950/40 border border-cyan-500/30 text-xs font-mono text-cyan-400 mb-2">
+        <i class="fas fa-trophy"></i> RECOGNITION
+      </div>
+      <h2 class="text-3xl font-extrabold text-white">Honors & Certifications</h2>
+      <p class="text-slate-400 text-sm mt-2">Verified awards from premier institutions and corporate industry programs.</p>
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-4xl mx-auto">
+      
+      <!-- Research Award -->
+      <div class="glass-panel-elevated p-7 rounded-3xl border border-amber-500/30 flex items-start gap-4">
+        <div class="w-12 h-12 rounded-2xl bg-amber-500/10 text-amber-400 flex items-center justify-center text-xl shrink-0 border border-amber-500/30">
+          <i class="fas fa-award"></i>
+        </div>
+        <div>
+          <span class="text-xs font-mono text-amber-400 bg-amber-950/60 px-3 py-1 rounded-full border border-amber-500/30 font-bold">1st Position • 03/2025</span>
+          <h4 class="text-base font-bold text-white mt-2">Research Colloquium: Oral/Poster Presentation</h4>
+          <p class="text-xs font-semibold text-slate-300 mt-0.5">Birla Institute of Technology, Mesra</p>
+          <p class="text-xs text-slate-400 mt-2.5 leading-relaxed">
+            Awarded 1st Position in the Oral Presentation category at the annual Research Colloquium held at BIT Mesra, presenting advanced analytical engineering research to faculty delegates.
+          </p>
+        </div>
+      </div>
+
+      <!-- Infosys Certifications -->
+      <div class="glass-panel-elevated p-7 rounded-3xl border border-cyan-500/30 flex items-start gap-4">
+        <div class="w-12 h-12 rounded-2xl bg-cyan-500/10 text-cyan-400 flex items-center justify-center text-xl shrink-0 border border-cyan-500/30">
+          <i class="fas fa-certificate"></i>
+        </div>
+        <div>
+          <span class="text-xs font-mono text-cyan-400 bg-cyan-950/60 px-3 py-1 rounded-full border border-cyan-500/30 font-bold">Infosys Springboard Verified</span>
+          <h4 class="text-base font-bold text-white mt-2">Web & Enterprise Engineering Credentials</h4>
+          <p class="text-xs font-semibold text-slate-300 mt-0.5">Infosys Springboard Program</p>
+          <ul class="text-xs text-slate-400 mt-2.5 space-y-1.5 font-mono">
+            <li class="flex items-center gap-2">
+              <i class="fas fa-check-circle text-cyan-400 text-xs"></i>
+              <span>Angular Development Professional</span>
+            </li>
+            <li class="flex items-center gap-2">
+              <i class="fas fa-check-circle text-cyan-400 text-xs"></i>
+              <span>JavaScript Programming Core</span>
+            </li>
+            <li class="flex items-center gap-2">
+              <i class="fas fa-check-circle text-cyan-400 text-xs"></i>
+              <span>TypeScript Essentials & Static Typing</span>
+            </li>
+          </ul>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ==========================================
+       CONTACT & GET IN TOUCH SECTION
+       ========================================== -->
+  <section id="contact" class="py-16 relative z-10 max-w-7xl mx-auto px-6 lg:px-8 border-t border-white/5">
+    <div class="text-center max-w-2xl mx-auto mb-14">
+      <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-cyan-950/40 border border-cyan-500/30 text-xs font-mono text-cyan-400 mb-2">
+        <i class="fas fa-paper-plane"></i> OPEN FOR ROLES
+      </div>
+      <h2 class="text-3xl font-extrabold text-white">Let's Connect & Collaborate</h2>
+      <p class="text-slate-400 text-sm mt-2">
+        Looking for software engineering opportunities, full-stack roles, or robotics engineering projects. Send a message directly below.
+      </p>
+    </div>
+
+    <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 max-w-5xl mx-auto">
+      
+      <!-- Contact Cards -->
+      <div class="lg:col-span-5 space-y-4">
+        
+        <div onclick="copyText('simrankumariltr@gmail.com', 'Email copied!')" class="p-4 rounded-2xl glass-panel-elevated hover:bg-slate-800 border border-white/10 hover:border-cyan-500/40 transition flex items-center gap-3.5 group cursor-pointer">
+          <div class="w-11 h-11 rounded-xl bg-cyan-500/10 text-cyan-400 flex items-center justify-center text-base group-hover:scale-110 transition">
+            <i class="fas fa-envelope"></i>
+          </div>
+          <div>
+            <span class="text-[11px] font-mono text-slate-400 block">Direct Email</span>
+            <span class="text-xs sm:text-sm font-bold text-white group-hover:text-cyan-300 transition">simrankumariltr@gmail.com</span>
+          </div>
+        </div>
+
+        <div onclick="copyText('+916202028486', 'Phone number copied!')" class="p-4 rounded-2xl glass-panel-elevated hover:bg-slate-800 border border-white/10 hover:border-emerald-500/40 transition flex items-center gap-3.5 group cursor-pointer">
+          <div class="w-11 h-11 rounded-xl bg-emerald-500/10 text-emerald-400 flex items-center justify-center text-base group-hover:scale-110 transition">
+            <i class="fas fa-phone"></i>
+          </div>
+          <div>
+            <span class="text-[11px] font-mono text-slate-400 block">Phone / WhatsApp</span>
+            <span class="text-xs sm:text-sm font-bold text-white group-hover:text-emerald-300 transition">+91-6202028486</span>
+          </div>
+        </div>
+
+        <div class="p-4 rounded-2xl glass-panel-elevated border border-white/10">
+          <span class="text-[11px] font-mono text-slate-400 block mb-3 font-semibold uppercase">Professional Channels:</span>
+          <div class="grid grid-cols-2 gap-2.5">
+            <a href="https://github.com/simran043" target="_blank" rel="noopener noreferrer" class="py-2.5 px-3 rounded-xl bg-slate-800/80 hover:bg-slate-700 text-xs font-bold text-slate-200 flex items-center justify-center gap-2 border border-white/5 transition">
+              <i class="fab fa-github text-sm"></i>
+              <span>GitHub</span>
+            </a>
+            <a href="https://linkedin.com/in/simran-kumar043" target="_blank" rel="noopener noreferrer" class="py-2.5 px-3 rounded-xl bg-slate-800/80 hover:bg-slate-700 text-xs font-bold text-slate-200 flex items-center justify-center gap-2 border border-white/5 transition">
+              <i class="fab fa-linkedin text-sm text-cyan-400"></i>
+              <span>LinkedIn</span>
+            </a>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Functional Real-Time Contact Form -->
+      <div class="lg:col-span-7 glass-panel-elevated rounded-3xl p-6 sm:p-8 border border-white/10">
+        <form onsubmit="handleContactSubmit(event)" class="space-y-4">
+          <div>
+            <label class="block text-xs font-mono text-slate-300 mb-1">Your Name *</label>
+            <input type="text" id="contact-name" required placeholder="Sarah Jenkins" class="w-full px-4 py-2.5 rounded-xl bg-slate-950 border border-white/10 text-white placeholder-slate-600 text-xs sm:text-sm focus:outline-none focus:border-cyan-500 transition">
+          </div>
+          <div>
+            <label class="block text-xs font-mono text-slate-300 mb-1">Your Email Address *</label>
+            <input type="email" id="contact-email" required placeholder="sarah@techcorp.com" class="w-full px-4 py-2.5 rounded-xl bg-slate-950 border border-white/10 text-white placeholder-slate-600 text-xs sm:text-sm focus:outline-none focus:border-cyan-500 transition">
+          </div>
+          <div>
+            <label class="block text-xs font-mono text-slate-300 mb-1">Message / Opportunity *</label>
+            <textarea id="contact-message" rows="3" required placeholder="Hi Simran, we loved your Loan Manager & Fire Extinguisher demos and would like to discuss..." class="w-full px-4 py-2.5 rounded-xl bg-slate-950 border border-white/10 text-white placeholder-slate-600 text-xs sm:text-sm focus:outline-none focus:border-cyan-500 transition resize-none"></textarea>
+          </div>
+          <button type="submit" id="contact-submit-btn" class="w-full py-3.5 rounded-xl font-bold text-xs sm:text-sm bg-gradient-to-r from-cyan-500 via-teal-400 to-emerald-500 hover:opacity-95 text-black shadow-lg shadow-cyan-500/20 transition flex items-center justify-center gap-2">
+            <i class="fas fa-paper-plane"></i>
+            <span>Send Direct Message</span>
+          </button>
+        </form>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="py-8 border-t border-white/10 text-center text-xs text-slate-500">
+    <div class="max-w-7xl mx-auto px-4 flex flex-col sm:flex-row items-center justify-between gap-3">
+      <p>© 2026 Simran Kumari • Portfolio Design Hackathon 2026</p>
+      <div class="flex items-center gap-4 text-slate-400 font-mono text-[11px]">
+        <a href="#hero" class="hover:text-cyan-400 transition">Back to Top ↑</a>
+        <span>•</span>
+        <a href="https://github.com/simran043" target="_blank" class="hover:text-cyan-400 transition">GitHub</a>
+        <span>•</span>
+        <a href="https://linkedin.com/in/simran-kumar043" target="_blank" class="hover:text-cyan-400 transition">LinkedIn</a>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Mini Cart Modal for Project 3 Sandbox -->
+  <div id="mini-cart-modal" class="fixed inset-0 z-50 bg-black/80 backdrop-blur-sm hidden flex items-center justify-center p-4">
+    <div class="glass-panel-elevated p-6 rounded-3xl max-w-sm w-full border border-emerald-500/40 space-y-4">
+      <div class="flex items-center justify-between border-b border-white/10 pb-3">
+        <h5 class="text-sm font-bold text-white flex items-center gap-2">
+          <i class="fas fa-bag-shopping text-emerald-400"></i> Beauty_Care Bag
+        </h5>
+        <button onclick="closeMiniCartModal()" class="text-slate-400 hover:text-white"><i class="fas fa-times"></i></button>
+      </div>
+      <div id="mini-cart-items-list" class="space-y-2 max-h-48 overflow-y-auto text-xs"></div>
+      <div class="flex justify-between items-center pt-2 border-t border-white/10 text-xs font-mono font-bold">
+        <span>Cart Total:</span>
+        <span id="mini-cart-total-price" class="text-emerald-400">₹0</span>
+      </div>
+      <button onclick="checkoutMiniCart()" class="w-full py-2.5 rounded-xl font-bold text-xs bg-emerald-500 text-black hover:bg-emerald-400 transition">
+        Simulate Instant Checkout
+      </button>
+    </div>
+  </div>
+
+  <!-- Complete Javascript Engine -->
+  <script>
+    // ==========================================
+    // 1. Audio FX Synthesizer (Web Audio API)
+    // ==========================================
+    let audioCtx = null;
+    let audioMuted = false;
+
+    function playTone(freq, type = 'sine', duration = 0.12) {
+      if (audioMuted) return;
+      try {
+        if (!audioCtx) audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+        const osc = audioCtx.createOscillator();
+        const gain = audioCtx.createGain();
+        osc.type = type;
+        osc.frequency.setValueAtTime(freq, audioCtx.currentTime);
+        gain.gain.setValueAtTime(0.06, audioCtx.currentTime);
+        gain.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + duration);
+        osc.connect(gain);
+        gain.connect(audioCtx.destination);
+        osc.start();
+        osc.stop(audioCtx.currentTime + duration);
+      } catch (err) {}
+    }
+
+    function toggleAudioFx() {
+      audioMuted = !audioMuted;
+      const icon = document.getElementById('sound-icon');
+      if (audioMuted) {
+        icon.className = 'fas fa-volume-xmark text-slate-500';
+        triggerToast("Interface Audio Muted");
+      } else {
+        icon.className = 'fas fa-volume-high text-cyan-400';
+        playTone(600);
+        triggerToast("Interface Audio Enabled");
+      }
+    }
+
+
+    // ==========================================
+    // 2. Interactive Background Canvas Mesh
+    // ==========================================
+    const canvas = document.getElementById('bg-canvas');
+    const ctx = canvas.getContext('2d');
+    let width, height;
+    let particles = [];
+
+    function setupCanvas() {
+      width = canvas.width = window.innerWidth;
+      height = canvas.height = window.innerHeight;
+      particles = [];
+      const count = Math.floor((width * height) / 16000);
+      for (let i = 0; i < count; i++) {
+        particles.push({
+          x: Math.random() * width,
+          y: Math.random() * height,
+          vx: (Math.random() - 0.5) * 0.4,
+          vy: (Math.random() - 0.5) * 0.4,
+          size: Math.random() * 1.6 + 0.8
+        });
+      }
+    }
+
+    function renderCanvas() {
+      ctx.clearRect(0, 0, width, height);
+      ctx.fillStyle = 'rgba(6, 182, 212, 0.4)';
+
+      for (let i = 0; i < particles.length; i++) {
+        let p = particles[i];
+        p.x += p.vx;
+        p.y += p.vy;
+        if (p.x < 0 || p.x > width) p.vx *= -1;
+        if (p.y < 0 || p.y > height) p.vy *= -1;
+
+        ctx.beginPath();
+        ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
+        ctx.fill();
+
+        for (let j = i + 1; j < particles.length; j++) {
+          let p2 = particles[j];
+          let dist = Math.hypot(p.x - p2.x, p.y - p2.y);
+          if (dist < 85) {
+            ctx.strokeStyle = `rgba(6, 182, 212, ${0.12 * (1 - dist / 85)})`;
+            ctx.lineWidth = 0.5;
+            ctx.beginPath();
+            ctx.moveTo(p.x, p.y);
+            ctx.lineTo(p2.x, p2.y);
+            ctx.stroke();
+          }
+        }
+      }
+      requestAnimationFrame(renderCanvas);
+    }
+    window.addEventListener('resize', setupCanvas);
+
+
+    // ==========================================
+    // 3. Dynamic Headline Typing Engine
+    // ==========================================
+    const headlinePhrases = [
+      "Full-Stack Web Architect (MERN)",
+      "Robotic WAAM Automation Researcher",
+      "Data Structures & Algorithms Specialist",
+      "Embedded AI & Hardware Builder"
+    ];
+    let phraseIdx = 0, charIdx = 0, isDeleting = false;
+    const typeTarget = document.getElementById('typing-text');
+
+    function runTyping() {
+      const phrase = headlinePhrases[phraseIdx];
+      if (isDeleting) {
+        typeTarget.textContent = phrase.substring(0, charIdx - 1);
+        charIdx--;
+      } else {
+        typeTarget.textContent = phrase.substring(0, charIdx + 1);
+        charIdx++;
+      }
+
+      let speed = isDeleting ? 25 : 65;
+      if (!isDeleting && charIdx === phrase.length) {
+        speed = 2200;
+        isDeleting = true;
+      } else if (isDeleting && charIdx === 0) {
+        isDeleting = false;
+        phraseIdx = (phraseIdx + 1) % headlinePhrases.length;
+        speed = 350;
+      }
+      setTimeout(runTyping, speed);
+    }
+
+
+    // ==============================================================
+    // 4. PROJECT 1 LIVE DEMO: LOAN MANAGER & NODEMAILER SIMULATOR
+    // ==============================================================
+    const loanAmtSlider = document.getElementById('loan-amount-slider');
+    const loanRateSlider = document.getElementById('loan-rate-slider');
+    const loanTenureSlider = document.getElementById('loan-tenure-slider');
+
+    const loanAmtVal = document.getElementById('loan-amount-val');
+    const loanRateVal = document.getElementById('loan-rate-val');
+    const loanTenureVal = document.getElementById('loan-tenure-val');
+
+    const loanEmiOutput = document.getElementById('loan-emi-output');
+    const loanInterestOutput = document.getElementById('loan-interest-output');
+    const loanTotalOutput = document.getElementById('loan-total-output');
+
+    const loanPRatio = document.getElementById('loan-p-ratio');
+    const loanIRatio = document.getElementById('loan-i-ratio');
+    const loanPBar = document.getElementById('loan-p-bar');
+    const loanIBar = document.getElementById('loan-i-bar');
+
+    let currentCalculatedEMI = 0;
+    let currentCalculatedPrincipal = 500000;
+
+    function recalculateLoanEMI() {
+      const P = parseFloat(loanAmtSlider.value);
+      const rate = parseFloat(loanRateSlider.value);
+      const N = parseInt(loanTenureSlider.value);
+
+      currentCalculatedPrincipal = P;
+      loanAmtVal.textContent = '₹' + P.toLocaleString('en-IN');
+      loanRateVal.textContent = rate.toFixed(1) + '%';
+      loanTenureVal.textContent = `${N} Months (${(N/12).toFixed(1)} Yrs)`;
+
+      const r = (rate / 12) / 100;
+      let emi = (P * r * Math.pow(1 + r, N)) / (Math.pow(1 + r, N) - 1);
+      if (isNaN(emi)) emi = P / N;
+      currentCalculatedEMI = Math.round(emi);
+
+      const totalPayment = currentCalculatedEMI * N;
+      const totalInterest = Math.max(0, totalPayment - P);
+
+      loanEmiOutput.textContent = '₹' + currentCalculatedEMI.toLocaleString('en-IN');
+      loanInterestOutput.textContent = '₹' + Math.round(totalInterest).toLocaleString('en-IN');
+      loanTotalOutput.textContent = '₹' + Math.round(totalPayment).toLocaleString('en-IN');
+
+      const pPercent = Math.round((P / totalPayment) * 100);
+      const iPercent = 100 - pPercent;
+      loanPRatio.textContent = pPercent + '%';
+      loanIRatio.textContent = iPercent + '%';
+      loanPBar.style.width = pPercent + '%';
+      loanIBar.style.width = iPercent + '%';
+    }
+
+    loanAmtSlider.addEventListener('input', () => { recalculateLoanEMI(); playTone(440, 'triangle', 0.05); });
+    loanRateSlider.addEventListener('input', () => { recalculateLoanEMI(); playTone(500, 'triangle', 0.05); });
+    loanTenureSlider.addEventListener('input', () => { recalculateLoanEMI(); playTone(550, 'triangle', 0.05); });
+
+    // Borrower CRM Data Store
+    let borrowers = [
+      { id: 'LN-201', name: 'Rohan Sharma', principal: '₹4,50,000', emi: '₹14,732', status: 'ACTIVE', email: 'rohan.s@example.com' },
+      { id: 'LN-202', name: 'Ananya Verma', principal: '₹2,00,000', emi: '₹6,548', status: 'ACTIVE', email: 'ananya.v@example.com' },
+      { id: 'LN-203', name: 'Devendra Prasad', principal: '₹8,00,000', emi: '₹26,190', status: 'PAID', email: 'd.prasad@example.com' }
+    ];
+
+    function renderBorrowers() {
+      const list = document.getElementById('borrower-records-list');
+      list.innerHTML = '';
+      borrowers.forEach((b, index) => {
+        const item = document.createElement('div');
+        item.className = 'p-2.5 rounded-xl bg-slate-900 border border-white/5 flex items-center justify-between text-xs';
+        item.innerHTML = `
+          <div>
+            <div class="flex items-center gap-2">
+              <span class="font-bold text-white">${b.name}</span>
+              <span class="text-[10px] font-mono text-cyan-400 bg-cyan-950/70 px-1.5 py-0.5 rounded">${b.id}</span>
+              <span class="text-[10px] font-mono px-1.5 py-0.5 rounded font-bold ${b.status === 'ACTIVE' ? 'bg-emerald-950 text-emerald-400 border border-emerald-500/30' : 'bg-slate-800 text-slate-400'}">${b.status}</span>
+            </div>
+            <div class="text-[11px] text-slate-400 font-mono mt-0.5">
+              Principal: <span class="text-slate-200">${b.principal}</span> | EMI: <span class="text-purple-300 font-bold">${b.emi}</span>
+            </div>
+          </div>
+          <div class="flex items-center gap-1.5">
+            <button onclick="triggerSimulatedEmail(${index})" title="Dispatch Nodemailer SMTP Email" class="px-2.5 py-1 rounded-lg bg-slate-800 hover:bg-cyan-600 text-cyan-300 hover:text-white transition text-[11px] font-semibold flex items-center gap-1">
+              <i class="fas fa-paper-plane text-[10px]"></i> Send Alert
+            </button>
+            <button onclick="toggleBorrowerStatus(${index})" title="Toggle Active / Paid" class="p-1.5 rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-400 hover:text-white transition text-[10px]">
+              <i class="fas fa-arrows-rotate"></i>
+            </button>
+          </div>
+        `;
+        list.appendChild(item);
+      });
+    }
+
+    function addCalculatedLoanToCRM() {
+      playTone(620);
+      const randomNames = ['Kavita Mehta', 'Arjun Kapoor', 'Pooja Singh', 'Vikram Sen', 'Nisha Roy'];
+      const pick = randomNames[Math.floor(Math.random() * randomNames.length)];
+      const newEntry = {
+        id: 'LN-' + Math.floor(200 + Math.random() * 800),
+        name: pick,
+        principal: '₹' + currentCalculatedPrincipal.toLocaleString('en-IN'),
+        emi: '₹' + currentCalculatedEMI.toLocaleString('en-IN'),
+        status: 'ACTIVE',
+        email: pick.toLowerCase().replace(' ', '.') + '@borrower.in'
+      };
+      borrowers.unshift(newEntry);
+      renderBorrowers();
+      triggerToast(`Added ${pick} to Loan Manager CRM.`);
+    }
+
+    function toggleBorrowerStatus(idx) {
+      playTone(480);
+      borrowers[idx].status = borrowers[idx].status === 'ACTIVE' ? 'PAID' : 'ACTIVE';
+      renderBorrowers();
+    }
+
+    function triggerSimulatedEmail(idx) {
+      playTone(720);
+      const b = borrowers[idx];
+      const terminal = document.getElementById('nodemailer-terminal');
+      const badge = document.getElementById('nodemailer-status-badge');
+      
+      badge.textContent = 'DISPATCHING...';
+      badge.className = 'text-amber-400 bg-amber-950/70 px-2 py-0.5 rounded border border-amber-500/30 text-[10px] animate-pulse';
+
+      const time = new Date().toLocaleTimeString();
+      terminal.innerHTML = `
+        <div class="text-cyan-300">[${time}] NODEMAILER TRANSPORTER INITIALIZED via Gmail/SMTP</div>
+        <div class="text-slate-300">> Target: <strong class="text-white">${b.email}</strong></div>
+        <div class="text-slate-300">> Payload: { loanId: "${b.id}", recipient: "${b.name}", emiDue: "${b.emi}" }</div>
+        <div class="text-emerald-400 font-bold">> 250 2.0.0 OK: Email alert delivered successfully!</div>
+      `;
+      terminal.scrollTop = terminal.scrollHeight;
+
+      setTimeout(() => {
+        badge.textContent = 'DELIVERED (250 OK)';
+        badge.className = 'text-emerald-400 bg-emerald-950/70 px-2 py-0.5 rounded border border-emerald-500/30 text-[10px]';
+        triggerToast(`Nodemailer alert successfully delivered to ${b.email}!`);
+      }, 700);
+    }
+
+
+    // ==============================================================
+    // 5. PROJECT 2 LIVE DEMO: AI AUTOMATED FIRE EXTINGUISHER
+    // ==============================================================
+    const fireTempSlider = document.getElementById('fire-temp-slider');
+    const fireSmokeSlider = document.getElementById('fire-smoke-slider');
+    const fireTempVal = document.getElementById('fire-temp-val');
+    const fireSmokeVal = document.getElementById('fire-smoke-val');
+    const flameIrToggle = document.getElementById('flame-ir-toggle');
+
+    const fireStatusBanner = document.getElementById('fire-status-banner');
+    const fireStatusTitle = document.getElementById('fire-status-title');
+    const fireStatusIcon = document.getElementById('fire-status-icon');
+    const gpioStatusBadge = document.getElementById('gpio-status-badge');
+    const aiConfidenceBadge = document.getElementById('ai-confidence-badge');
+
+    const servoNeedle = document.getElementById('servo-needle');
+    const servoAngleCaption = document.getElementById('servo-angle-caption');
+    const solenoidBadge = document.getElementById('solenoid-badge');
+    const solenoidSubtext = document.getElementById('solenoid-subtext');
+    const fireSerialTerminal = document.getElementById('fire-serial-terminal');
+
+    let opticalFlameActive = false;
+    let alarmActive = false;
+
+    function evaluateFireHazard() {
+      const temp = parseInt(fireTempSlider.value);
+      const smoke = parseInt(fireSmokeSlider.value);
+
+      fireTempVal.textContent = `${temp}°C ${temp > 65 ? '(CRITICAL)' : '(Normal)'}`;
+      fireSmokeVal.textContent = `${smoke} PPM ${smoke > 400 ? '(HAZARD)' : ''}`;
+
+      const hazardDetected = (temp >= 65 && smoke >= 350) || opticalFlameActive || (temp > 80);
+
+      if (hazardDetected && !alarmActive) {
+        triggerFireAlarm('Thermal Threshold & Smoke Density Breached');
+      } else if (!hazardDetected && alarmActive) {
+        clearFireAlarm();
+      }
+    }
+
+    function toggleOpticalFlameSensor() {
+      opticalFlameActive = !opticalFlameActive;
+      playTone(opticalFlameActive ? 750 : 380);
+      if (opticalFlameActive) {
+        flameIrToggle.textContent = 'FLAME ACTIVE!';
+        flameIrToggle.className = 'px-3 py-1.5 rounded-lg text-xs font-mono font-bold bg-rose-600 text-white animate-pulse';
+        triggerFireAlarm('Infrared Optical Sensor: 760-1100nm Flame Spectrum Verified');
+      } else {
+        flameIrToggle.textContent = 'INACTIVE';
+        flameIrToggle.className = 'px-3 py-1.5 rounded-lg text-xs font-mono font-bold bg-slate-800 text-slate-300 border border-white/10';
+        evaluateFireHazard();
+      }
+    }
+
+    function triggerVoiceKeyword() {
+      playTone(850, 'sawtooth', 0.2);
+      appendFireSerial('<span class="text-purple-300 font-bold">[VOICE RECOGNITION] Keyword triggered: "FIRE ALERT!" Confidence: 97.2%</span>');
+      triggerFireAlarm('Speech Recognition Emergency Command Verified');
+    }
+
+    function triggerFireAlarm(reason) {
+      alarmActive = true;
+      playTone(900, 'sawtooth', 0.3);
+
+      fireStatusBanner.className = 'p-4 rounded-2xl bg-rose-950/70 border border-rose-500/70 flex items-center justify-between mb-5 transition-all duration-300 shadow-lg shadow-rose-950/50';
+      fireStatusTitle.textContent = 'EMERGENCY: FIRE DETECTED - ACTUATOR ENGAGED!';
+      fireStatusTitle.className = 'text-sm sm:text-base font-bold text-rose-300 animate-pulse';
+      fireStatusIcon.className = 'w-10 h-10 rounded-xl bg-rose-500/20 text-rose-400 flex items-center justify-center text-lg animate-bounce';
+      fireStatusIcon.innerHTML = '<i class="fas fa-fire"></i>';
+
+      gpioStatusBadge.textContent = 'GPIO PIN 18: HIGH [RELAY ON]';
+      gpioStatusBadge.className = 'text-xs font-mono px-2.5 py-1 rounded bg-rose-600 text-white font-bold animate-pulse';
+      aiConfidenceBadge.textContent = 'AI Confidence: 98.4%';
+      aiConfidenceBadge.className = 'text-[10px] font-mono text-rose-300 font-bold mt-1';
+
+      servoNeedle.style.transform = 'rotate(45deg)';
+      servoAngleCaption.textContent = '45° (Target Locked & Aimed)';
+      servoAngleCaption.className = 'text-xs font-mono text-rose-400 font-bold block mt-2';
+
+      solenoidBadge.className = 'inline-block px-3 py-1.5 rounded-full text-xs font-mono font-bold bg-rose-600 text-white animate-pulse';
+      solenoidBadge.textContent = 'VALVE OPEN [120 kPa DISCHARGE]';
+      solenoidSubtext.textContent = 'CO2 / Chemical Agent Actively Deployed!';
+
+      appendFireSerial(`<span class="text-rose-400 font-bold">[ALERT] ${reason}</span>`);
+      appendFireSerial('<span class="text-cyan-300">[ACTUATOR] Arduino digital pin 7 signaled -> Servo oriented at 45 deg angle.</span>');
+      triggerToast('Emergency: Fire Extinguisher Actuator Dispatched!');
+    }
+
+    function clearFireAlarm() {
+      alarmActive = false;
+      fireStatusBanner.className = 'p-4 rounded-2xl bg-emerald-950/40 border border-emerald-500/40 flex items-center justify-between mb-5 transition-all duration-300';
+      fireStatusTitle.textContent = 'SYSTEM NORMAL • MONITORING';
+      fireStatusTitle.className = 'text-sm sm:text-base font-bold text-white';
+      fireStatusIcon.className = 'w-10 h-10 rounded-xl bg-emerald-500/20 text-emerald-400 flex items-center justify-center text-lg';
+      fireStatusIcon.innerHTML = '<i class="fas fa-shield-halved"></i>';
+
+      gpioStatusBadge.textContent = 'GPIO PIN 18: LOW';
+      gpioStatusBadge.className = 'text-xs font-mono px-2.5 py-1 rounded bg-slate-900 text-slate-400 border border-white/10';
+      aiConfidenceBadge.textContent = 'AI Confidence: 0%';
+      aiConfidenceBadge.className = 'text-[10px] font-mono text-slate-400 mt-1';
+
+      servoNeedle.style.transform = 'rotate(0deg)';
+      servoAngleCaption.textContent = '0° (Centered Standby)';
+      servoAngleCaption.className = 'text-xs font-mono text-cyan-300 font-bold block mt-2';
+
+      solenoidBadge.className = 'inline-block px-3 py-1.5 rounded-full text-xs font-mono font-bold bg-slate-800 text-slate-400 border border-white/10';
+      solenoidBadge.textContent = 'VALVE CLOSED [0 kPa]';
+      solenoidSubtext.textContent = 'Pressurized Agent: Standby';
+
+      appendFireSerial('<span class="text-emerald-400">[CLEAR] Environment returned to safe baseline. Valve closed.</span>');
+    }
+
+    function resetFireSimulator() {
+      playTone(420);
+      fireTempSlider.value = 28;
+      fireSmokeSlider.value = 85;
+      opticalFlameActive = false;
+      flameIrToggle.textContent = 'INACTIVE';
+      flameIrToggle.className = 'px-3 py-1.5 rounded-lg text-xs font-mono font-bold bg-slate-800 text-slate-300 border border-white/10';
+      clearFireAlarm();
+      evaluateFireHazard();
+      triggerToast('Hardware Simulator Reset.');
+    }
+
+    function appendFireSerial(text) {
+      const time = new Date().toLocaleTimeString();
+      const row = document.createElement('div');
+      row.innerHTML = `[${time}] ${text}`;
+      fireSerialTerminal.appendChild(row);
+      fireSerialTerminal.scrollTop = fireSerialTerminal.scrollHeight;
+    }
+
+    fireTempSlider.addEventListener('input', () => { evaluateFireHazard(); playTone(300 + parseInt(fireTempSlider.value)*4, 'sine', 0.04); });
+    fireSmokeSlider.addEventListener('input', () => { evaluateFireHazard(); playTone(250 + parseInt(fireSmokeSlider.value)*2, 'sine', 0.04); });
+
+
+    // ==============================================================
+    // 6. PROJECT 3 LIVE DEMO: BEAUTY_CARE SANDBOX
+    // ==============================================================
+    const beautyViewport = document.getElementById('beauty-device-viewport');
+    const vpTabMobile = document.getElementById('vp-tab-mobile');
+    const vpTabTablet = document.getElementById('vp-tab-tablet');
+    const vpTabDesktop = document.getElementById('vp-tab-desktop');
+
+    function setBeautyViewport(mode) {
+      playTone(560);
+      [vpTabMobile, vpTabTablet, vpTabDesktop].forEach(b => {
+        b.className = 'px-3.5 py-1.5 rounded-xl font-bold text-slate-400 hover:text-white transition flex items-center gap-1.5';
+      });
+
+      if (mode === 'mobile') {
+        beautyViewport.style.width = '375px';
+        vpTabMobile.className = 'px-3.5 py-1.5 rounded-xl font-bold bg-emerald-500/20 text-emerald-300 border border-emerald-500/40 transition flex items-center gap-1.5';
+      } else if (mode === 'tablet') {
+        beautyViewport.style.width = '680px';
+        vpTabTablet.className = 'px-3.5 py-1.5 rounded-xl font-bold bg-emerald-500/20 text-emerald-300 border border-emerald-500/40 transition flex items-center gap-1.5';
+      } else if (mode === 'desktop') {
+        beautyViewport.style.width = '100%';
+        vpTabDesktop.className = 'px-3.5 py-1.5 rounded-xl font-bold bg-emerald-500/20 text-emerald-300 border border-emerald-500/40 transition flex items-center gap-1.5';
+      }
+    }
+
+    const beautyProducts = [
+      { id: 1, name: 'Hydra-Glow Botanical Serum', cat: 'skincare', price: 649, rating: '4.9 ★' },
+      { id: 2, name: 'Argan Herbal Hair Elixir', cat: 'haircare', price: 499, rating: '4.8 ★' },
+      { id: 3, name: 'Organic Rosehip Clay Mask', cat: 'organic', price: 399, rating: '4.7 ★' },
+      { id: 4, name: 'Vitamin C Night Repair Balm', cat: 'skincare', price: 799, rating: '5.0 ★' }
+    ];
+
+    let miniCartItems = [];
+
+    function renderMiniShop(category = 'all') {
+      const grid = document.getElementById('mini-shop-grid');
+      grid.innerHTML = '';
+      const filtered = category === 'all' ? beautyProducts : beautyProducts.filter(p => p.cat === category);
+
+      filtered.forEach(p => {
+        const item = document.createElement('div');
+        item.className = 'p-2.5 rounded-xl bg-slate-800/90 border border-white/5 flex flex-col justify-between text-xs';
+        item.innerHTML = `
+          <div>
+            <div class="flex justify-between items-center text-[10px] text-amber-400 font-mono mb-1">
+              <span>${p.rating}</span>
+              <span class="text-slate-400 uppercase font-semibold">${p.cat}</span>
+            </div>
+            <h6 class="font-bold text-white text-[11px] leading-tight mb-2">${p.name}</h6>
+          </div>
+          <div class="flex items-center justify-between pt-1">
+            <span class="font-bold text-emerald-400 font-mono text-xs">₹${p.price}</span>
+            <button onclick="addToBeautyCart(${p.id})" class="px-2.5 py-1 rounded-lg bg-emerald-600 hover:bg-emerald-500 text-black font-extrabold text-[10px] transition">
+              + Bag
+            </button>
+          </div>
+        `;
+        grid.appendChild(item);
+      });
+    }
+
+    function filterMiniShop(cat) {
+      playTone(520);
+      document.querySelectorAll('.mini-filter-tab').forEach(b => {
+        b.className = 'mini-filter-tab px-3 py-1 rounded-lg bg-slate-800 text-slate-300';
+      });
+      event.target.className = 'mini-filter-tab px-3 py-1 rounded-lg bg-emerald-500 text-black font-bold';
+      renderMiniShop(cat);
+    }
+
+    function addToBeautyCart(prodId) {
+      playTone(660);
+      const prod = beautyProducts.find(p => p.id === prodId);
+      miniCartItems.push(prod);
+      document.getElementById('mini-cart-pill').textContent = miniCartItems.length;
+      triggerToast(`Added ${prod.name} to Shopping Bag!`);
+    }
+
+    function openMiniCartModal() {
+      playTone(500);
+      const modal = document.getElementById('mini-cart-modal');
+      const list = document.getElementById('mini-cart-items-list');
+      const totalEl = document.getElementById('mini-cart-total-price');
+      list.innerHTML = '';
+
+      if (miniCartItems.length === 0) {
+        list.innerHTML = '<div class="text-slate-400 text-center py-4">Shopping bag is empty. Add products above!</div>';
+        totalEl.textContent = '₹0';
+      } else {
+        let sum = 0;
+        miniCartItems.forEach((item, idx) => {
+          sum += item.price;
+          const row = document.createElement('div');
+          row.className = 'flex justify-between items-center bg-slate-900/80 p-2 rounded-lg border border-white/5';
+          row.innerHTML = `
+            <span>${item.name}</span>
+            <div class="flex items-center gap-2">
+              <span class="font-mono text-emerald-400 font-bold">₹${item.price}</span>
+              <button onclick="removeMiniCartItem(${idx})" class="text-rose-400 hover:text-white"><i class="fas fa-trash text-[10px]"></i></button>
+            </div>
+          `;
+          list.appendChild(row);
+        });
+        totalEl.textContent = '₹' + sum.toLocaleString('en-IN');
+      }
+
+      modal.classList.remove('hidden');
+    }
+
+    function removeMiniCartItem(idx) {
+      miniCartItems.splice(idx, 1);
+      document.getElementById('mini-cart-pill').textContent = miniCartItems.length;
+      openMiniCartModal();
+    }
+
+    function closeMiniCartModal() {
+      document.getElementById('mini-cart-modal').classList.add('hidden');
+    }
+
+    function checkoutMiniCart() {
+      if (miniCartItems.length === 0) {
+        triggerToast("Bag is empty! Add products to simulate checkout.");
+        return;
+      }
+      playTone(800);
+      triggerToast("Checkout order processed! (Simulated e-commerce transaction)");
+      miniCartItems = [];
+      document.getElementById('mini-cart-pill').textContent = 0;
+      closeMiniCartModal();
+    }
+
+
+    // ==========================================
+    // 7. Interactive Skills Filter Matrix
+    // ==========================================
+    function filterSkills(category) {
+      playTone(510);
+      document.querySelectorAll('.skill-btn').forEach(btn => {
+        btn.className = 'skill-btn px-3.5 py-1.5 rounded-xl text-xs font-bold bg-slate-800 text-slate-300 hover:text-white transition';
+      });
+      event.target.className = 'skill-btn active px-3.5 py-1.5 rounded-xl text-xs font-bold bg-cyan-500 text-black transition';
+
+      const cards = document.querySelectorAll('.skill-card');
+      cards.forEach(card => {
+        if (category === 'all' || card.dataset.cat === category) {
+          card.style.display = 'block';
+        } else {
+          card.style.display = 'none';
+        }
+      });
+    }
+
+
+    // ==========================================
+    // 8. Contact Form, Clipboard & Notifications
+    // ==========================================
+    function triggerToast(msg) {
+      const container = document.getElementById('toast-container');
+      const toast = document.createElement('div');
+      toast.className = 'pointer-events-auto flex items-center gap-2.5 px-4 py-3 rounded-2xl glass-panel-elevated border border-cyan-500/40 text-xs sm:text-sm text-white shadow-2xl transition-all duration-300 transform translate-y-3 opacity-0';
+      toast.innerHTML = `<i class="fas fa-check-circle text-cyan-400 text-sm"></i> <span>${msg}</span>`;
+      container.appendChild(toast);
+
+      setTimeout(() => {
+        toast.classList.remove('translate-y-3', 'opacity-0');
+      }, 30);
+
+      setTimeout(() => {
+        toast.classList.add('opacity-0', 'translate-y-2');
+        setTimeout(() => toast.remove(), 300);
+      }, 3500);
+    }
+
+    function copyText(val, toastMessage) {
+      playTone(600);
+      const temp = document.createElement('textarea');
+      temp.value = val;
+      document.body.appendChild(temp);
+      temp.select();
+      document.execCommand('copy');
+      document.body.removeChild(temp);
+      triggerToast(toastMessage);
+    }
+
+    function copyProfileSpec() {
+      const spec = JSON.stringify({
+        candidate: "Simran Kumari",
+        college: "Birla Institute of Technology, Patna",
+        degree: "B.Tech in Mechanical Engineering (2023-2027)",
+        cgpa: 7.3,
+        research: "IIT (BHU) Varanasi CoE-MTD",
+        email: "simrankumariltr@gmail.com",
+        phone: "+91-6202028486",
+        github: "https://github.com/simran043",
+        linkedin: "https://linkedin.com/in/simran-kumar043"
+      }, null, 2);
+      copyText(spec, "Candidate JSON Spec copied to clipboard!");
+    }
+
+    function requestResume() {
+      playTone(640);
+      triggerToast("Opening official resume dispatch for Simran Kumari...");
+      window.location.href = "mailto:simrankumariltr@gmail.com?subject=Resume%20Request%20for%20Simran%20Kumari";
+    }
+
+    function handleContactSubmit(e) {
+      e.preventDefault();
+      playTone(700);
+      const name = document.getElementById('contact-name').value;
+      const email = document.getElementById('contact-email').value;
+      const message = document.getElementById('contact-message').value;
+      const btn = document.getElementById('contact-submit-btn');
+
+      btn.innerHTML = `<i class="fas fa-circle-notch fa-spin"></i> Preparing Relay...`;
+      btn.disabled = true;
+
+      setTimeout(() => {
+        const mailto = `mailto:simrankumariltr@gmail.com?subject=${encodeURIComponent('Hackathon Portfolio Inquiry - ' + name)}&body=${encodeURIComponent(message + '\n\nSender: ' + email)}`;
+        window.location.href = mailto;
+        btn.innerHTML = `<i class="fas fa-paper-plane"></i> <span>Send Direct Message</span>`;
+        btn.disabled = false;
+        triggerToast(`Thank you ${name}! Mail client opened for Simran Kumari.`);
+      }, 600);
+    }
+
+    // Mobile Navigation Drawer Toggle
+    const mobileBtn = document.getElementById('mobile-menu-btn');
+    const mobileMenu = document.getElementById('mobile-menu');
+    mobileBtn.addEventListener('click', () => {
+      mobileMenu.classList.toggle('hidden');
+    });
+    document.querySelectorAll('.mobile-nav-link').forEach(link => {
+      link.addEventListener('click', () => mobileMenu.classList.add('hidden'));
+    });
+
+    // Dark / Light Theme Toggle
+    const themeBtn = document.getElementById('theme-toggle');
+    const themeIcon = document.getElementById('theme-icon');
+    let isDarkMode = true;
+
+    themeBtn.addEventListener('click', () => {
+      isDarkMode = !isDarkMode;
+      playTone(550);
+      if (!isDarkMode) {
+        document.documentElement.classList.add('light');
+        document.body.classList.remove('bg-surface-base', 'text-slate-100');
+        document.body.classList.add('bg-slate-100', 'text-slate-900');
+        themeIcon.className = 'fas fa-sun text-amber-500';
+        triggerToast("Switched to Crisp Light Mode");
+      } else {
+        document.documentElement.classList.remove('light');
+        document.body.classList.add('bg-surface-base', 'text-slate-100');
+        document.body.classList.remove('bg-slate-100', 'text-slate-900');
+        themeIcon.className = 'fas fa-moon text-slate-300';
+        triggerToast("Switched to Sleek Dark Mode");
+      }
+    });
+
+    // Window Init Loop
+    window.onload = function() {
+      setupCanvas();
+      renderCanvas();
+      runTyping();
+      recalculateLoanEMI();
+      renderBorrowers();
+      renderMiniShop();
+    };
+  </script>
+</body>
+</html>
