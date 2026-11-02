@@ -1,0 +1,19 @@
+# Render Blueprint: one web service that serves both the API and the built React site.
+# Render dashboard → New → Blueprint → pick this repo.
+services:
+  - type: web
+    name: simran-portfolio
+    runtime: node
+    plan: free
+    buildCommand: npm ci --include=dev && npm run build
+    startCommand: npm start
+    healthCheckPath: /api/health
+    envVars:
+      - key: MONGODB_URI
+        sync: false # Render asks for this when you create the Blueprint (MongoDB Atlas connection string)
+      - key: ADMIN_TOKEN
+        generateValue: true # random secret; view it in the service's Environment tab
+      - key: TRUST_PROXY
+        value: "true"
+      - key: ANALYTICS_TIMEZONE
+        value: Asia/Kolkata

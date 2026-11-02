@@ -125,6 +125,16 @@ On your host (Render, Railway, a VPS…), set at least these variables:
 - `TRUST_PROXY=true` if the app runs behind a proxy
 - `CORS_ORIGINS`: your site's URL
 
+### Easiest: Render (one service for site + API)
+
+`render.yaml` sets everything up. You need a free MongoDB Atlas database: allow access from `0.0.0.0/0` and copy its connection string.
+
+1. Render dashboard → **New → Blueprint**, then pick this GitHub repo.
+2. Paste the Atlas connection string when Render asks for `MONGODB_URI`, then click **Apply**.
+3. Find your admin password in the service's **Environment** tab, under `ADMIN_TOKEN` (Render generates it).
+
+On the free plan the service sleeps after 15 minutes of no traffic. The first visit after that takes about 30–60 seconds to load.
+
 ### Split hosting: frontend on Vercel, backend on Railway
 
 The repo already includes `railway.json` (backend build, start and health check) and `client/vercel.json` (frontend build and page routing).
