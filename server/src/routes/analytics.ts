@@ -25,6 +25,21 @@ function isDuplicateKeyError(err: unknown): boolean {
   return typeof err === 'object' && err !== null && (err as { code?: number }).code === 11000;
 }
 
+/**
+ * Host of the site that sent the request. When the frontend is hosted separately (e.g. Vercel),
+ * the Origin header names it; otherwise the API and the site share the Host header.
+ */
+function siteHost(origin: string | undefined, host: string | undefined): string | undefined {
+  if (origin) {
+    try {
+      return new URL(origin).host;
+    } catch {
+      // Malformed Origin: fall back to Host.
+    }
+  }
+  return host;
+}
+
 export const analyticsRouter = Router();
 
 /** Records a page view. A new sessionId also counts as a new visit. Bots are not counted. */
@@ -44,7 +59,7 @@ analyticsRouter.post(
             $setOnInsert: {
               visitorId: body.visitorId,
               path: body.path,
-              referrer: referrerHost(body.referrer, req.get('host')),
+              referrer: referrerHost(body.referrer, siteHost(req.get('origin'), req.get('host'))),
               device: client.device,
               browser: client.browser,
             },

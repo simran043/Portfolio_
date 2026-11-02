@@ -125,6 +125,32 @@ On your host (Render, Railway, a VPS…), set at least these variables:
 - `TRUST_PROXY=true` if the app runs behind a proxy
 - `CORS_ORIGINS`: your site's URL
 
+### Split hosting: frontend on Vercel, backend on Railway
+
+The repo already includes `railway.json` (backend build, start and health check) and `client/vercel.json` (frontend build and page routing).
+
+**1. Database:** use MongoDB Atlas (free tier), or add a MongoDB service in Railway.
+
+**2. Backend on Railway**
+- **New Project → Deploy from GitHub repo**, and pick this repo. Leave the root directory as the repo root, since `railway.json` handles the build.
+- Variables:
+
+  | Variable | Value |
+  | --- | --- |
+  | `MONGODB_URI` | Your Atlas string, or `${{MongoDB.MONGO_URL}}` if you used Railway's MongoDB |
+  | `ADMIN_TOKEN` | A long random string |
+  | `TRUST_PROXY` | `true` |
+  | `CORS_ORIGINS` | Your Vercel URL, e.g. `https://your-site.vercel.app` (no trailing slash) |
+
+- Go to **Settings → Networking → Generate Domain**, and copy the URL.
+
+**3. Frontend on Vercel**
+- **Add New → Project**, pick this repo, and set **Root Directory** to `client`.
+- Environment variable: set `VITE_API_URL` to the Railway URL, e.g. `https://your-api.up.railway.app`.
+- Deploy. If your Vercel URL changes later, update `CORS_ORIGINS` on Railway.
+
+`VITE_API_URL` is applied at build time, so **redeploy on Vercel** after you change it.
+
 ---
 
 ## API reference

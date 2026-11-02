@@ -66,11 +66,17 @@ export class ApiError extends Error {
   }
 }
 
+/**
+ * Where the backend lives. Empty in development (Vite proxies /api) and when Express serves the site itself;
+ * set VITE_API_URL (e.g. https://your-api.up.railway.app) when the frontend is hosted separately.
+ */
+const API_BASE = (import.meta.env.VITE_API_URL ?? '').trim().replace(/\/+$/, '');
+
 async function request<T>(path: string, init: RequestInit & { token?: string } = {}): Promise<T> {
   const { token, headers, ...rest } = init;
   let res: Response;
   try {
-    res = await fetch(`/api${path}`, {
+    res = await fetch(`${API_BASE}/api${path}`, {
       ...rest,
       headers: {
         'Content-Type': 'application/json',
