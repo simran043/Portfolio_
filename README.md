@@ -4,6 +4,10 @@ A full-stack TypeScript portfolio website for **Simran Kumari** (B.Tech Mechanic
 
 It has playable project demos, a visitor counter, a contact form that saves messages, and a private admin dashboard.
 
+🌐 **Live site:** [simran-portfolio-34pg.onrender.com](https://simran-portfolio-34pg.onrender.com)
+
+> Hosted on Render's free plan: if the site hasn't had visitors for a while, the first load can take 30–60 seconds.
+
 | Part | Stack |
 | --- | --- |
 | **Frontend** (`client/`) | React 18, TypeScript, Vite 5, Tailwind CSS 3, Font Awesome |
