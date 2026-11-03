@@ -9,7 +9,7 @@ export const PROFILE = {
   linkedin: 'https://linkedin.com/in/simran-kumar043',
 } as const;
 
-export const RESUME_URL = 'https://drive.google.com/file/d/1i7ypdDDTUEHwyEynP-X3gt6V-avgasfN/view';
+export const RESUME_URL = 'https://drive.google.com/file/d/1UL2ZcUrXa-Aov3wPY5kaMmn6UV2RDUma/view?usp=sharing';
 
 export const SECTIONS = [
   { id: 'hero', label: 'Overview' },
